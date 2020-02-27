@@ -10,11 +10,13 @@
 </head>
 
 <body>
-    <div class="intro">
+    <!--Intro Page-->
+    <!--
+    <div class="intro">        
         <h1>Touch-Me</h1>
         <h2>The fun retro game with the unfortunate name</h2>
         <h3></h3>
-    </div>
+    </div> -->
     <div class="center-column">
         <div class="game-panel">
             <div class="top">
@@ -24,14 +26,17 @@
                 </div>
                 <!--display-->
                 <div class="display">
-                    <h2 id="score"></h2>
+                    <div id="strict-display">STRICT: OFF</div>
+                    <div id="high-last-display">HIGH: 0</div>
+                    <div id="score-display">SCORE: 100</div>
+                    <div id="skill-display">SKILL: EASY</div>
                 </div>
-                <div class="strict"></div>
-                <div class="start-reset"></div>
-                <div class="high-last"></div>
             </div>
-            <!--brushed metal panel--> 
+            <!--brushed metal panel-->
             <div class="middle">
+                <button id="strict">STRICT</button>
+                <button id="start-reset">START</button>
+                <button id="high-last">H/L</button>
                 <div id="blue"></div>
                 <div id="yellow"></div>
                 <div id="red"></div>
@@ -39,16 +44,19 @@
             </div>
             <!-- end of panel-->
             <div class="bottom">
-                <div class="on-off"></div>
+                <button id="on-off">ON/OFF</button>
+                <button id="skill-button">SKILL</button>
             </div>
+
         </div>
     </div>
-    <div class="how-to-play">
+    <!--how to play and History Page-->
+    <!--<div class="how-to-play">
         <h1>How to Play</h1>
     </div>
     <div class="history">
         <h1>History</h1>
-    </div>
+    </div>-->
 
 </body>
 
