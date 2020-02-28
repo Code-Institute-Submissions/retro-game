@@ -11,6 +11,9 @@ let highLast = "last";
 let highScore = 0;
 let lastScore = 0;
 
+// The Game is not started when the page loads
+let start = false;
+
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
 // strictDisplay is top left in the display window
@@ -23,6 +26,8 @@ const onOffButton = document.querySelector("#on-off");
 const strictButton = document.querySelector("#strict");
 // State of the HighLast button
 const highLastButton = document.querySelector("#high-last");
+// Start/Reset Button
+const startResetButton = document.querySelector("#start-reset")
 
 
 
@@ -65,3 +70,20 @@ highLastButton.addEventListener('click', (event) => {
         }
     }
 });
+
+//start/reset Button functionality
+startResetButton.addEventListener('click', (event) => {
+    if (on === true) {
+        if (start === false){
+            start = true;
+            startResetButton.innerHTML= "RESET";
+            scoreDisplay.innerHTML = "SCORE: " + score;
+            playGame();
+        } else {
+            start = false;
+            startResetButton.innerHTML= "START";
+            scoreDisplay.innerHTML = "PRESS START";
+            resetGame();
+        }
+    }});
+    
