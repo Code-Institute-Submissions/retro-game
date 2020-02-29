@@ -24,17 +24,25 @@ let playerSequence = [];
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
 // strictDisplay is top left in the display window
-const strictDisplay = document.querySelector("#strict-display")
+const strictDisplay = document.querySelector("#strict-display");
 // High / Last is displayed in the top right of the display window
-const highLastDisplay = document.querySelector("#high-last-display")
-// State of the On/Off button
+const highLastDisplay = document.querySelector("#high-last-display");
+// location of the On/Off button
 const onOffButton = document.querySelector("#on-off");
-// State of the Strict button
+// location of the Strict button
 const strictButton = document.querySelector("#strict");
-// State of the HighLast button
+// location of the HighLast button
 const highLastButton = document.querySelector("#high-last");
-// Start/Reset Button
-const startResetButton = document.querySelector("#start-reset")
+// location of Start/Reset Button
+const startResetButton = document.querySelector("#start-reset");
+// location of Blue Button
+const blueButton = document.querySelector("blue");
+// location of Yellow Button
+const yellowButton = document.querySelector("yellow");
+// location of the red button
+const redButton = document.querySelector("red");
+// location of the green button
+const greenButton = document.querySelector("green");
 
 
 
@@ -81,29 +89,55 @@ highLastButton.addEventListener('click', (event) => {
 //start/reset Button functionality
 startResetButton.addEventListener('click', (event) => {
     if (on === true) {
-        if (start === false){
+        if (start === false) {
             start = true;
-            startResetButton.innerHTML= "RESET";
+            startResetButton.innerHTML = "RESET";
             scoreDisplay.innerHTML = "SCORE: " + score;
             playGame();
         } else {
             start = false;
-            startResetButton.innerHTML= "START";
+            startResetButton.innerHTML = "START";
             scoreDisplay.innerHTML = "PRESS START";
             resetGame();
         }
-    }});
-    
-function playGame(){
+    }
+});
+
+//-----FUNCTIONS-----------//
+function playGame() {
     score = 0;
+    playerTurn = false;
     playerSequence = [];
     compSequence = [];
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
-    for (i=0; i<8; i++){
+    for (i = 0; i < 8; i++) {
         //math.random returns number between 0 and 1. 
         //I have multiplied this by 4 and then use math.floor to round it down to the nearest whole number.
         //I have then added 1. This ensures that the number is always between 1 and 4
-        sequence.push(Math.floor(Math.random() * 4) + 1);}
-    //Need to determine turns and add items from the random sequence to the compSeq.......TBC...
-}
+        sequence.push(Math.floor(Math.random() * 4) + 1);
+    }
+    //computers turn first
+    compPlay()//play sequence for the player to copy and then set playerTurn = true
+}; 
+
+function compPlay() {
+    for (i = 0; i > score; i++) {
+        compSequence.push(sequence[i])
+        switch (compSequence[i]) {
+            case 1:
+                blueActive(); //need to set timeout.. maybe add to colour functions
+                break;
+            case 2:
+                yellowActive();
+                break;
+            case 3:
+                redActive();
+                break;
+            case 4:
+                greenActive();
+                break;
+        };
+    };
+    playerTurn = true;
+};
