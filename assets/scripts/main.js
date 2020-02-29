@@ -103,6 +103,41 @@ startResetButton.addEventListener('click', (event) => {
     }
 });
 
+
+//Blue button functionality - only listening during players turn
+blueButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        blueActive();
+        playerSequence.push[1];
+        check();
+    }
+});
+//Yellow button functionality - only listening during players turn
+yellowButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        yellowActive();
+        playerSequence.push[2];
+        check();
+    }
+});
+//Red button functionality - only listening during players turn
+redButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        redActive();
+        playerSequence.push[3];
+        check();
+    }
+});
+//Green button functionality - only listening during players turn
+greenButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        blueActive();
+        playerSequence.push[4];
+        check();
+    }
+});
+
+
 //-----FUNCTIONS-----------//
 function playGame() {
     score = 0;
@@ -117,14 +152,14 @@ function playGame() {
         //I have then added 1. This ensures that the number is always between 1 and 4
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
+    console.log("sequence = " + sequence);//for debug
     //computers turn first
     compPlay()//play sequence for the player to copy and then set playerTurn = true
 }; 
 
 function compPlay() {
-    for (i = 0; i > score; i++) {
-        compSequence.push(sequence[i])
-        switch (compSequence[i]) {
+    for (i = 0; i < score; i++) {
+        switch (Sequence[i]) {
             case 1:
                 blueActive(); //need to set timeout.. maybe add to colour functions
                 break;
@@ -138,6 +173,28 @@ function compPlay() {
                 greenActive();
                 break;
         };
+
     };
+    compSequence.push(sequence[score])
     playerTurn = true;
+    console.log("compSequence =" + compSequence);//for debug
 };
+
+//Check Function is called from the coloured button eventlisteners
+//this checks the players input against the computer sequence.
+function check() {
+    console.log("playerSequence = " + playerSequence);
+    if (playerSequence === Sequence) {
+        winning();
+    } else if (playerSequence === compSequence) {
+        playerTurn = false; //correct sequence comp turn
+        score++;
+    } else if (strict === false) {
+        playerSequence.pop(); // .pop removes last item from the array
+        compSequence.pop();
+        strict = true;
+        playerTurn = false;
+    } else {
+        gameOver();
+    }
+}
