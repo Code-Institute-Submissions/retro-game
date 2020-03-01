@@ -146,7 +146,7 @@ button {
 
 /*=== Coloured Buttons ====*/
 #blue {
-    background-color: #0040ff;
+    background-color: #0040ff88;
     height:15vh;
     width:15vh;
     display: inline-block;
@@ -155,35 +155,41 @@ button {
     right:50%;
     border-top-left-radius: 30%;
     margin-left:5%;  
-    margin-right: 0;
-     
+    margin-right: 0;    
+}
+.highlightBlue {
+    background-color: #0040ff;
 }
 #yellow {
-    background-color:#ffff00;
+    background-color:#ffff0088;
     height:15vh;
     width:15vh;
     display: inline-block;
-/*position:sticky;*/
     top:50%;
     left:50%;
     border-top-right-radius: 30%;
     margin-right:5%;
     margin-left: 0;
 }
+.highlightYellow{
+    background-color: #ffff00;
+}
 #red {
-    background-color: #ff1a1a;
+    background-color: #ff1a1a88;
     height:15vh;
     width:15vh;
     display: inline-block;
-/*position:sticky;*/
     top:65%;
     right:50%;
     border-bottom-left-radius: 30%;
-    margin-left:5%;  
-     
+    margin-left:5%;       
 }
+.highlightRed{
+    background-color: #ff1a1a;
+}
+
 #green {
-    background-color:#009900;
+    background-color:#00990088;
     height:15vh;
     width:15vh;
     display: inline-block;
@@ -192,6 +198,9 @@ button {
     left:50%;
     border-bottom-right-radius: 30%;
     margin-right:5%;
+}
+.highlightGreen {
+    background-color: #009900;
 }
 
 
