@@ -152,10 +152,11 @@ function playGame() {
         //I have then added 1. This ensures that the number is always between 1 and 4
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
-    console.log("sequence = " + sequence);//for debug
+    console.log("sequence = " + sequence); //for debug
     //computers turn first
-    compPlay()//play sequence for the player to copy and then set playerTurn = true
-}; 
+    compPlay() //play sequence for the player to copy and then set playerTurn = true
+};
+
 
 function compPlay() {
     for (i = 0; i < score; i++) {
@@ -177,7 +178,7 @@ function compPlay() {
     };
     compSequence.push(sequence[score])
     playerTurn = true;
-    console.log("compSequence =" + compSequence);//for debug
+    console.log("compSequence =" + compSequence); //for debug
 };
 
 //Check Function is called from the coloured button eventlisteners
@@ -189,12 +190,65 @@ function check() {
     } else if (playerSequence === compSequence) {
         playerTurn = false; //correct sequence comp turn
         score++;
+        compPlay();
     } else if (strict === false) {
         playerSequence.pop(); // .pop removes last item from the array
         compSequence.pop();
         strict = true;
         playerTurn = false;
+        compPlay();
     } else {
         gameOver();
     }
+}
+//=========COLOUR ACTIVATION FUNCTIONS==============//
+
+//highlight quadrant and play note .. Called during the computers turn and the players turn
+function blueActive() {
+    setTimeout(function () {
+        //add a class to the blue quadrant to change the background colour for 1 sec.
+        var blueQuadrant = document.getElementById("#blue");
+        blueQuadrant.classList.add("highlightBlue");
+        //add audio
+    }, 1000);
+    //removes highlight and adds time interval between colours - May have to move time interval to separate function???
+    setTimeout(function() {
+        blueQuadrant.classList.remove("highlightBlue");
+    },200);
+}
+function yellowActive() {
+    setTimeout(function () {
+        var yellowQuadrant = document.getElementById("#yellow");
+        yellowQuadrant.classList.add("highlightYellow");
+        //add audio
+    }, 1000);
+    //removes highlight and adds time interval between colours - 
+    //May have to move time interval to separate function and colour classs removal???
+    setTimeout(function() {
+        yellowQuadrant.classList.remove("highlightYellow");
+    },200);
+}
+function redActive() {
+    setTimeout(function () {
+        var redQuadrant = document.getElementById("#red");
+        redQuadrant.classList.add("highlightRed");
+        //add audio
+    }, 1000);
+    //removes highlight and adds time interval between colours - 
+    //May have to move time interval to separate function???
+    setTimeout(function() {
+        redQuadrant.classList.remove("highlightRed");
+    },200);
+}
+function greenActive() {
+    setTimeout(function () {
+        var greenQuadrant = document.getElementById("#green");
+        greenQuadrant.classList.add("highlightGreen");
+        //add audio
+    }, 1000);
+    //removes highlight and adds time interval between colours - 
+    //May have to move time interval to separate function???
+    setTimeout(function() {
+        greenQuadrant.classList.remove("highlightGreen");
+    },200);
 }
