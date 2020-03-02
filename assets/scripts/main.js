@@ -15,7 +15,9 @@ let lastScore = 0;
 let start = false;
 
 //computer always goes first
-let playerTurn= false; 
+let playerTurn = false;
+
+let playerCorrect = false;
 
 //Array to hold random sequence
 let sequence = [];
@@ -116,7 +118,8 @@ blueButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
         console.log("DEBUG: player turn Blue pressed"); //debug
         blueActive();
-        playerSequence.push[1];
+        playerSequence.push([1]);
+        console.log("DEBUG: playerSequence = " + playerSequence);
         check();
     }
 });
@@ -125,7 +128,7 @@ yellowButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
         console.log("DEBUG: player turn Yellow pressed"); //debug
         yellowActive();
-        playerSequence.push[2];
+        playerSequence.push([2]);
         check();
     }
 });
@@ -134,7 +137,7 @@ redButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
         console.log("DEBUG: player turn Red pressed"); //debug
         redActive();
-        playerSequence.push[3];
+        playerSequence.push([3]);
         check();
     }
 });
@@ -143,7 +146,7 @@ greenButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
         console.log("DEBUG: player turn Green pressed"); //debug
         blueActive();
-        playerSequence.push[4];
+        playerSequence.push([4]);
         check();
     }
 });
@@ -172,8 +175,9 @@ function playGame() {
 //Computers turn
 function compPlay() {
     console.log("DEBUG 3: compPlay Function called"); //debug
-    for (j = 0; j < score; j++) {
-        switch (Sequence[j]) {
+    compSequence.push(sequence[score])
+    for (j = 0; j < compSequence.length; j++) {
+        switch (compSequence[j]) {
             case 1:
                 console.log("DEBUG 4: compPlay Function blue"); //debug
                 blueActive(); //need to set timeout.. maybe add to colour functions
@@ -193,7 +197,6 @@ function compPlay() {
         };
 
     };
-    compSequence.push(sequence[score])
     playerTurn = true;
     console.log("DEBUG 5: compPlay Function: compSequence =" + compSequence); //for debug
 };
@@ -202,14 +205,25 @@ function compPlay() {
 //this checks the players input against the computer sequence.
 function check() {
     console.log("check function");
-    console.log("playerSequence = " + playerSequence);
-    if (playerSequence === Sequence) {
+    console.log("DEBUG: playerSequence = " + playerSequence);
+
+    for (i = 0; i < playerSequence.length; i++) {
+        if (playerSequence[i] != compSequence[i]) {
+            console.log("DEBUG: Check function: player sequence not equal to compSequence");
+            playerCorrect = false;
+        } else {
+            playerCorrect = true;
+        }
+        console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
+    }
+
+    if (playerCorrect === true && sequence.length===playerSequence.length) {
         console.log("player wins!");
         winning();
-    } else if (playerSequence === compSequence) {
+    } else if (playerCorrect === true) {
         console.log("player correct comp to play!");
         playerTurn = false; //correct sequence comp turn
-        score++;
+        score = score + 1;
         compPlay();
     } else if (strict === false) {
         console.log("strict active player gets second chance");
@@ -230,51 +244,54 @@ function blueActive() {
     console.log("blueActive function");
     setTimeout(function () {
         //add a class to the blue quadrant to change the background colour for 1 sec.
-        var blueQuadrant = document.getElementById("#blue");
-        blueQuadrant.classList.add("highlightBlue");
+        //var blueQuadrant = document.getElementById("#blue");
+        blueButton.classList.add("highlightBlue");
         //add audio
     }, 1000);
     //removes highlight and adds time interval between colours - May have to move time interval to separate function???
-    setTimeout(function() {
-        blueQuadrant.classList.remove("highlightBlue");
-    },200);
+    setTimeout(function () {
+        blueButton.classList.remove("highlightBlue");
+    }, 200);
 }
+
 function yellowActive() {
     console.log("yellowActive function");
     setTimeout(function () {
-        var yellowQuadrant = document.getElementById("#yellow");
-        yellowQuadrant.classList.add("highlightYellow");
+        //var yellowQuadrant = document.getElementById("#yellow");
+        yellowButton.classList.add("highlightYellow");
         //add audio
     }, 1000);
     //removes highlight and adds time interval between colours - 
     //May have to move time interval to separate function and colour classs removal???
-    setTimeout(function() {
-        yellowQuadrant.classList.remove("highlightYellow");
-    },200);
+    setTimeout(function () {
+        yellowButton.classList.remove("highlightYellow");
+    }, 200);
 }
+
 function redActive() {
     console.log("redActive function");
     setTimeout(function () {
-        var redQuadrant = document.getElementById("#red");
-        redQuadrant.classList.add("highlightRed");
+        //var redQuadrant = document.getElementById("#red");
+        redButton.classList.add("highlightRed");
         //add audio
     }, 1000);
     //removes highlight and adds time interval between colours - 
     //May have to move time interval to separate function???
-    setTimeout(function() {
-        redQuadrant.classList.remove("highlightRed");
-    },200);
+    setTimeout(function () {
+        redButton.classList.remove("highlightRed");
+    }, 200);
 }
+
 function greenActive() {
     console.log("greenActive function");
     setTimeout(function () {
-        var greenQuadrant = document.getElementById("#green");
-        greenQuadrant.classList.add("highlightGreen");
+        //var greenQuadrant = document.getElementById("#green");
+        greenButton.classList.add("highlightGreen");
         //add audio
     }, 1000);
     //removes highlight and adds time interval between colours - 
     //May have to move time interval to separate function???
-    setTimeout(function() {
-        greenQuadrant.classList.remove("highlightGreen");
-    },200);
+    setTimeout(function () {
+        greenButton.classList.remove("highlightGreen");
+    }, 200);
 }
