@@ -27,6 +27,10 @@ let compSequence = [];
 //Array to hold player sequence ()
 let playerSequence = [];
 
+let j =0;
+let compPlayInterval;
+let round = 0;
+
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
 // strictDisplay is top left in the display window
@@ -114,56 +118,15 @@ startResetButton.addEventListener('click', (event) => {
 });
 
 
-//Blue button functionality - only listening during players turn
-blueButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
-        console.log("DEBUG: player turn Blue pressed"); //debug
-        blueActive();
-        playerSequence.push([1]);
-        console.log("DEBUG: playerSequence = " + playerSequence);
-        check();
-    }
-});
-//Yellow button functionality - only listening during players turn
-yellowButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
-        console.log("DEBUG: player turn Yellow pressed"); //debug
-        yellowActive();
-        playerSequence.push([2]);
-        check();
-    }
-});
-//Red button functionality - only listening during players turn
-redButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
-        console.log("DEBUG: player turn Red pressed"); //debug
-        redActive();
-        playerSequence.push([3]);
-        check();
-    }
-});
-//Green button functionality - only listening during players turn
-greenButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
-        console.log("DEBUG: player turn Green pressed"); //debug
-        greenActive();
-        playerSequence.push([4]);
-        check();
-    }
-});
 
 
 //-----FUNCTIONS-----------//
 function playGame() {
     score = 0;
     playerTurn = false;
-    playerSequence = [];
-    compSequence = [];
-    sequence = [];
+    playerSequence = []; //to hold the players input - cleared each turn
+    compSequence = []; //to hold the computer input - incremented each turn
+    sequence = []; // randomly generated
     console.log("DEBUG 1: playGame Function"); //debug
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
@@ -175,38 +138,141 @@ function playGame() {
     }
     console.log("DEBUG 2: play game function: sequence = " + sequence); //for debug
     //computers turn first
-    compPlay() //play sequence for the player to copy and then set playerTurn = true
+    round = 1; // round 1 play first part of sequence 
+    compPlayInterval = setInterval(compPlay,600); //play sequence for the player to copy and then set playerTurn = true
 };
 
 //Computers turn
 function compPlay() {
     console.log("DEBUG 3: compPlay Function called"); //debug
-    compSequence.push(sequence[score])
-    for (i = 0; i < compSequence.length; i++) setTimeout(() => {
+    if (j>round){
+        j=0;
+        playerTurn= true;
+        clearInterval(compPlayInterval);
+    }
+    
+    if (sequence[j] === 1){
+        blueActive();
+        setTimeout(() => {             
+            coloursNotActive();
+        }, 300);
+    }
+    if (sequence[j] === 2){
+        yellowActive();
+        setTimeout(() => {             
+            coloursNotActive();
+        }, 300);
+    }
+    if (sequence[j] === 3){
+        redActive();
+        setTimeout(() => {             
+            coloursNotActive();
+        }, 300);
+    }
+    if (sequence[j] === 4){
+        greenActive();
+        setTimeout(() => {             
+            coloursNotActive();
+        }, 300);
+    }
+    j++;
+
+    //all running at once may need to use an interval instead of for loop
+    
+    /*for (i = 0; i < compSequence.length; i++){
         switch (compSequence[i]) {
             case 1:
                 console.log("DEBUG 4: compPlay Function blue"); //debug
-                blueActive(); //need to set timeout.. maybe add to colour functions
+                blueActive();
+                
                 break;
             case 2:
                 console.log("DEBUG 4: compPlay Function yellow"); //debug
                 yellowActive();
+                setTimeout(() => {   
+                    coloursNotActive();    
+                }, 500);
+                
                 break;
             case 3:
                 console.log("DEBUG 4: compPlay Function red"); //debug
                 redActive();
+                setTimeout(() => {   
+                    coloursNotActive();    
+                }, 500);
                 break;
             case 4:
                 console.log("DEBUG 4: compPlay Function green"); //debug
                 greenActive();
+                setTimeout(() => {   
+                    coloursNotActive();    
+                }, 500);
                 break;
         };
-
-    }, 1000);
-    coloursNotActive();
+    }*/
+    
+    
     playerTurn = true;
+    playerSequence = [];
     console.log("DEBUG 5: compPlay Function: compSequence = " + compSequence); //for debug
 };
+
+//Blue button functionality - only listening during players turn
+blueButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        playerTurn=false; // ignore future presses until after computers turn
+        console.log("DEBUG: player turn Blue pressed"); //debug
+        blueActive();
+        playerSequence.push([1]);
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
+        check();
+    }
+});
+//Yellow button functionality - only listening during players turn
+yellowButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        playerTurn=false; // ignore future presses until after computers turn
+        console.log("DEBUG: player turn Yellow pressed"); //debug
+        yellowActive();
+        playerSequence.push([2]);
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
+        check();
+    }
+});
+//Red button functionality - only listening during players turn
+redButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        playerTurn=false; // ignore future presses until after computers turn
+        console.log("DEBUG: player turn Red pressed"); //debug
+        redActive();
+        setTimeout
+        playerSequence.push([3]);
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
+        check();
+    }
+});
+//Green button functionality - only listening during players turn
+greenButton.addEventListener('click', (event) => {
+    if (playerTurn === true) {
+        playerTurn=false; // ignore future presses until after computers turn
+        console.log("DEBUG: player turn Green pressed"); //debug
+        greenActive();
+        playerSequence.push([4]);
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
+        check();
+    }
+});
+
+
+
 
 //Check Function is called from the coloured button eventlisteners
 //this checks the players input against the computer sequence.
@@ -237,6 +303,7 @@ function check() {
         console.log("player correct comp to play!");
         playerTurn = false; //correct sequence comp turn
         score = score + 1;
+        scoreDisplay.innerHTML = "SCORE: " + score;
         compPlay();
     } else if (strict === false) {
         console.log("strict active player gets second chance");
@@ -256,14 +323,14 @@ function check() {
 function blueActive() {
     console.log("blueActive function");
     //Change backgroundcolor
-    blueButton.style.backgroundColor = "#0040ff";
+    blueButton.style.backgroundColor = "#ff1a1a";
     //*****add audio****
 }
 
 function yellowActive() {
     console.log("yellowActive function");
     //Change backgroundcolor
-    yellowButton.style.backgroundColor = "#ffff00";
+    yellowButton.style.backgroundColor = "#ff1a1a";
     //*****add audio****
 }
 
@@ -277,14 +344,14 @@ function redActive() {
 function greenActive() {
     console.log("greenActive function");
     //change background color
-    greenButton.style.backgroundColor = "#009900";
+    greenButton.style.backgroundColor = "#ff1a1a";
     //*****add audio****
 }
 
 function coloursNotActive() {
-    console.log("DEBUG: Deactivate colours");
-    blueButton.style.backgroundColor = "##0040ff88";
-    yellowButton.style.backgroundColor = "#ffff0088";
-    redButton.style.backgroundColor = "#ff1a1a88";
-    greenButton.style.backgroundColor = "#00990088";
+        console.log("DEBUG: Deactivate colours");
+        blueButton.style.backgroundColor = "#0040ff88";
+        yellowButton.style.backgroundColor = "#ffff0088";
+        redButton.style.backgroundColor = "#ff1a1a88";
+        greenButton.style.backgroundColor = "#00990088";
 }
