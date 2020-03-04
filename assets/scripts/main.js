@@ -331,7 +331,7 @@ function coloursNotActive() {
 
 function resetGame() {
     console.log("DEBUG: Reset game");
-    updateHLScore()
+    updateHLScore();
     //change display
     scoreDisplay.innerHTML = "PRESS START";
     
@@ -341,7 +341,7 @@ function resetGame() {
 
 function winning(){
     console.log("DEBUG: Winning!!");
-    updateHLScore()
+    updateHLScore();
     //AUDIO FANFARE
 
     //change display
@@ -352,13 +352,14 @@ function winning(){
 
 function gameOver(){
     console.log("DEBUG: Game Over");
-    updateHLScore()
+    updateHLScore();
     //AUDIO looser tone
     //change display
     scoreDisplay.innerHTML = "YOU LOOSE!";
 
 
 }
+//---Function to update high and last scores-----//
 function updateHLScore(){
     lastScore = score;
     if (lastScore > highScore){
