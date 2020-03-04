@@ -127,6 +127,7 @@ function playGame() {
     playerSequence = []; //to hold the players input - cleared each turn
     compSequence = []; //to hold the computer input - incremented each turn
     sequence = []; // randomly generated
+    j =0;
     console.log("DEBUG 1: playGame Function"); //debug
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
@@ -136,18 +137,25 @@ function playGame() {
         //I have then added 1. This ensures that the number is always between 1 and 4
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
-    console.log("DEBUG 2: play game function: sequence = " + sequence); //for debug
+    console.log("DEBUG: play game function: sequence = " + sequence); //for debug
     //computers turn first
     round = 1; // round 1 play first part of sequence 
-    compPlayInterval = setInterval(compPlay,600); //play sequence for the player to copy and then set playerTurn = true
+    compPlayInterval = setInterval(compPlay,100); //play sequence for the player to copy and then set playerTurn = true
 };
 
 //Computers turn
 function compPlay() {
-    console.log("DEBUG 3: compPlay Function called"); //debug
-    if (j>round){
+    console.log("DEBUG: compPlay Function called"); //debug
+    if (j===round){
         j=0;
         playerTurn= true;
+        for (i=0;i>round; i++){ 
+            compSequence[i]=sequence[i];
+            console.log("DEBUG: compSequence = " + compSequence);
+        }
+        console.log("DEBUG: compSequence = " +compSequence);
+        console.log("DEBUG: round = " +round);
+        console.log("DEBUG: end compPlay - players turn");
         clearInterval(compPlayInterval);
     }
     
@@ -155,66 +163,27 @@ function compPlay() {
         blueActive();
         setTimeout(() => {             
             coloursNotActive();
-        }, 300);
+        }, 500);
     }
     if (sequence[j] === 2){
         yellowActive();
         setTimeout(() => {             
             coloursNotActive();
-        }, 300);
+        }, 500);
     }
     if (sequence[j] === 3){
         redActive();
         setTimeout(() => {             
             coloursNotActive();
-        }, 300);
+        }, 500);
     }
     if (sequence[j] === 4){
         greenActive();
         setTimeout(() => {             
             coloursNotActive();
-        }, 300);
+        }, 500);
     }
     j++;
-
-    //all running at once may need to use an interval instead of for loop
-    
-    /*for (i = 0; i < compSequence.length; i++){
-        switch (compSequence[i]) {
-            case 1:
-                console.log("DEBUG 4: compPlay Function blue"); //debug
-                blueActive();
-                
-                break;
-            case 2:
-                console.log("DEBUG 4: compPlay Function yellow"); //debug
-                yellowActive();
-                setTimeout(() => {   
-                    coloursNotActive();    
-                }, 500);
-                
-                break;
-            case 3:
-                console.log("DEBUG 4: compPlay Function red"); //debug
-                redActive();
-                setTimeout(() => {   
-                    coloursNotActive();    
-                }, 500);
-                break;
-            case 4:
-                console.log("DEBUG 4: compPlay Function green"); //debug
-                greenActive();
-                setTimeout(() => {   
-                    coloursNotActive();    
-                }, 500);
-                break;
-        };
-    }*/
-    
-    
-    playerTurn = true;
-    playerSequence = [];
-    console.log("DEBUG 5: compPlay Function: compSequence = " + compSequence); //for debug
 };
 
 //Blue button functionality - only listening during players turn
@@ -273,7 +242,6 @@ greenButton.addEventListener('click', (event) => {
 
 
 
-
 //Check Function is called from the coloured button eventlisteners
 //this checks the players input against the computer sequence.
 function check() {
@@ -290,11 +258,6 @@ function check() {
           console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
     }
     
-    /*if (playerSequence[score] === compSequence[score]) {
-        playerCorrect = true;
-    } else {
-        playerCorrect = false;
-    }*/
 
     if (playerCorrect === true && sequence.length === playerSequence.length) {
         console.log("player wins!");
@@ -304,14 +267,14 @@ function check() {
         playerTurn = false; //correct sequence comp turn
         score = score + 1;
         scoreDisplay.innerHTML = "SCORE: " + score;
-        compPlay();
+        compPlayInterval = setInterval(compPlay,1000);
     } else if (strict === false) {
         console.log("strict active player gets second chance");
         playerSequence.pop(); // .pop removes last item from the array
         compSequence.pop();
         strict = true;
         playerTurn = false;
-        compPlay();
+        compPlayInterval = setInterval(compPlay,1000);compPlay();
     } else {
         console.log("game over");
         gameOver();
@@ -323,14 +286,14 @@ function check() {
 function blueActive() {
     console.log("blueActive function");
     //Change backgroundcolor
-    blueButton.style.backgroundColor = "#ff1a1a";
+    blueButton.style.backgroundColor = "#0040ff";
     //*****add audio****
 }
 
 function yellowActive() {
     console.log("yellowActive function");
     //Change backgroundcolor
-    yellowButton.style.backgroundColor = "#ff1a1a";
+    yellowButton.style.backgroundColor = "#ffff00";
     //*****add audio****
 }
 
@@ -344,10 +307,11 @@ function redActive() {
 function greenActive() {
     console.log("greenActive function");
     //change background color
-    greenButton.style.backgroundColor = "#ff1a1a";
+    greenButton.style.backgroundColor = "#009900";
     //*****add audio****
 }
 
+//return colors to deactivated state
 function coloursNotActive() {
         console.log("DEBUG: Deactivate colours");
         blueButton.style.backgroundColor = "#0040ff88";
