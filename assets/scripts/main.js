@@ -28,8 +28,10 @@ let compSequence = [];
 let playerSequence = [];
 
 let j =0;
+let k=0;
 let compPlayInterval;
 let round = 0;
+let loopCount = 0;
 
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
@@ -145,39 +147,33 @@ function playGame() {
 
 //Computers turn
 function compPlay() {
-    console.log("DEBUG: compPlay Function called"); //debug
+    setTimeout(() => {             
+        coloursNotActive();
+    }, 500);
+    loopCount = loopCount+1
+    console.log("DEBUG: compPlay Function called" +loopCount); //debug
     if (j===round){
         j=0;
         playerTurn= true;
-        for (i=0;i>round; i++){ 
-            compSequence[i]=sequence[i];
-            console.log("DEBUG: compSequence = " + compSequence);
-        }
-        console.log("DEBUG: compSequence = " +compSequence);
         console.log("DEBUG: round = " +round);
         console.log("DEBUG: end compPlay - players turn");
         clearInterval(compPlayInterval);
-    }
-    
-    if (sequence[j] === 1){
+    }else if (sequence[j] === 1){
         blueActive();
         setTimeout(() => {             
             coloursNotActive();
         }, 500);
-    }
-    if (sequence[j] === 2){
+    }else if (sequence[j] === 2){
         yellowActive();
         setTimeout(() => {             
             coloursNotActive();
         }, 500);
-    }
-    if (sequence[j] === 3){
+    }else if (sequence[j] === 3){
         redActive();
         setTimeout(() => {             
             coloursNotActive();
         }, 500);
-    }
-    if (sequence[j] === 4){
+    }else if (sequence[j] === 4){
         greenActive();
         setTimeout(() => {             
             coloursNotActive();
@@ -189,7 +185,6 @@ function compPlay() {
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
         console.log("DEBUG: player turn Blue pressed"); //debug
         blueActive();
         playerSequence.push([1]);
@@ -202,7 +197,6 @@ blueButton.addEventListener('click', (event) => {
 //Yellow button functionality - only listening during players turn
 yellowButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
         console.log("DEBUG: player turn Yellow pressed"); //debug
         yellowActive();
         playerSequence.push([2]);
@@ -215,7 +209,6 @@ yellowButton.addEventListener('click', (event) => {
 //Red button functionality - only listening during players turn
 redButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
         console.log("DEBUG: player turn Red pressed"); //debug
         redActive();
         setTimeout
@@ -229,7 +222,6 @@ redButton.addEventListener('click', (event) => {
 //Green button functionality - only listening during players turn
 greenButton.addEventListener('click', (event) => {
     if (playerTurn === true) {
-        playerTurn=false; // ignore future presses until after computers turn
         console.log("DEBUG: player turn Green pressed"); //debug
         greenActive();
         playerSequence.push([4]);
@@ -247,10 +239,9 @@ greenButton.addEventListener('click', (event) => {
 function check() {
     console.log("check function");
     console.log("DEBUG: playerSequence = " + playerSequence);
-
     for (i = 0; i < playerSequence.length; i++) {
-        if (playerSequence[i] != compSequence[i]) {
-            console.log("DEBUG: Check function: player sequence not equal to compSequence");
+        if (playerSequence[i] != sequence[i]) {
+            console.log("DEBUG: Check function: player sequence not equal to sequence");
             playerCorrect = false;
         } else {
             playerCorrect = true;
@@ -260,20 +251,31 @@ function check() {
     
 
     if (playerCorrect === true && sequence.length === playerSequence.length) {
+        score = score+1;
         console.log("player wins!");
         winning();
-    } else if (playerCorrect === true) {
+    } else if (playerCorrect === true && playerSequence.length === round) {
         console.log("player correct comp to play!");
         playerTurn = false; //correct sequence comp turn
         score = score + 1;
         scoreDisplay.innerHTML = "SCORE: " + score;
+        playerSequence = [];//empty players sequence
+        round = round +1;
+        j=0;//added here as appeared to be starting from 1 in compPlay
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
         compPlayInterval = setInterval(compPlay,1000);
+    } else if (playerCorrect ===  true){
+        playerTurn = true; //continue listening for the rest of the sequence
     } else if (strict === false) {
         console.log("strict active player gets second chance");
-        playerSequence.pop(); // .pop removes last item from the array
-        compSequence.pop();
-        strict = true;
+        playerSequence = [];//empty players sequence
+        strict = true;// life used up
         playerTurn = false;
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 500);
         compPlayInterval = setInterval(compPlay,1000);compPlay();
     } else {
         console.log("game over");
