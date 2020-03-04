@@ -61,12 +61,12 @@ const greenButton = document.querySelector("#green");
 // On/Off button status - sets variable and changes text in the display window
 onOffButton.addEventListener('click', (event) => {
     if (on === false) {
-        console.log("DEBUG: ON"); //debug
+        console.log("DEBUG: on/off button status: ON"); //debug
         on = true;
         scoreDisplay.innerHTML = "PRESS START";
         // Add further functions later
     } else {
-        console.log("DEBUG: OFF"); //debug
+        console.log("DEBUG: on/off button status: OFF"); //debug
         on = false;
         scoreDisplay.innerHTML = "OFF";
         // Add further functions later
@@ -130,7 +130,7 @@ function playGame() {
     compSequence = []; //to hold the computer input - incremented each turn
     sequence = []; // randomly generated
     j =0;
-    console.log("DEBUG 1: playGame Function"); //debug
+    console.log("DEBUG: playGame Function"); //debug
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
     for (i = 0; i < 8; i++) {
@@ -181,6 +181,8 @@ function compPlay() {
     }
     j++;
 };
+
+//=================PLAYER TURN EVENT LISTNERS===============
 
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
@@ -233,7 +235,7 @@ greenButton.addEventListener('click', (event) => {
 });
 
 
-
+//============CHECK FUNCTION=============================//
 //Check Function is called from the coloured button eventlisteners
 //this checks the players input against the computer sequence.
 function check() {
@@ -320,4 +322,27 @@ function coloursNotActive() {
         yellowButton.style.backgroundColor = "#ffff0088";
         redButton.style.backgroundColor = "#ff1a1a88";
         greenButton.style.backgroundColor = "#00990088";
+}
+
+//========RESET GAME=========================//
+
+function resetGame() {
+    console.log("DEBUG: Reset game");
+    //change display
+}
+
+//==========PLAYER WINS FUNCTION=============//
+
+function winning(){
+    console.log("DEBUG: Winning!!");
+    //AUDIO FANFARE
+    //change display
+}
+
+//===============GAME OVER=================//
+
+function gameOver(){
+    console.log("DEBUG: Game Over");
+    //AUDIO looser tone
+    //change display
 }
