@@ -155,7 +155,6 @@ function compPlay() {
     if (j===round){
         j=0;
         playerTurn= true;
-        console.log("DEBUG: round = " +round);
         console.log("DEBUG: end compPlay - players turn");
         clearInterval(compPlayInterval);
     }else if (sequence[j] === 1){
@@ -262,11 +261,13 @@ function check() {
         score = score + 1;
         scoreDisplay.innerHTML = "SCORE: " + score;
         playerSequence = [];//empty players sequence
-        round = round +1;
         j=0;//added here as appeared to be starting from 1 in compPlay
+        //clear colours after .5s 
         setTimeout(() => { 
             coloursNotActive();
         }, 500);
+        round++;
+        //run compPlay() every 1s until clear interval is called. 
         compPlayInterval = setInterval(compPlay,1000);
     } else if (playerCorrect ===  true){
         playerTurn = true; //continue listening for the rest of the sequence
@@ -275,9 +276,11 @@ function check() {
         playerSequence = [];//empty players sequence
         strict = true;// life used up
         playerTurn = false;
+        //clear colours after .5s
         setTimeout(() => { 
             coloursNotActive();
         }, 500);
+        //run compPlay() every 1s until clear intaval is called.
         compPlayInterval = setInterval(compPlay,1000);compPlay();
     } else {
         console.log("game over");
@@ -328,21 +331,58 @@ function coloursNotActive() {
 
 function resetGame() {
     console.log("DEBUG: Reset game");
+    lastScore = score;
+    if (lastScore > highScore){
+        highScore = lastScore;  
+        if (highLast === "last"){  
+            highLastDisplay.innerHTML = "LAST: " + lastScore;    
+        }else{
+            highLastDisplay.innerHTML = "HIGH: " + highScore;
+        };
+    };
+    score = 0;
     //change display
+    scoreDisplay.innerHTML = "PRESS START";
+    
 }
 
 //==========PLAYER WINS FUNCTION=============//
 
 function winning(){
     console.log("DEBUG: Winning!!");
+    lastScore = score;
+    if (lastScore > highScore){
+        highScore = lastScore;  
+        if (highLast === "last"){  
+            highLastDisplay.innerHTML = "LAST: " + lastScore;    
+        }else{
+            highLastDisplay.innerHTML = "HIGH: " + highScore;
+        };
+    };
+    score = 0;
     //AUDIO FANFARE
+
     //change display
+    scoreDisplay.innerHTML = "WINNER!";
 }
 
 //===============GAME OVER=================//
 
 function gameOver(){
     console.log("DEBUG: Game Over");
+    lastScore = score;
+    if (lastScore > highScore){
+        highScore = lastScore;  
+        if (highLast === "last"){  
+            highLastDisplay.innerHTML = "LAST: " + lastScore;    
+        }else{
+            highLastDisplay.innerHTML = "HIGH: " + highScore;
+        };
+    };
+    score = 0;
     //AUDIO looser tone
     //change display
+    scoreDisplay.innerHTML = "YOU LOOSE!";
+
+
 }
