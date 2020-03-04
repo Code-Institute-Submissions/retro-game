@@ -331,16 +331,7 @@ function coloursNotActive() {
 
 function resetGame() {
     console.log("DEBUG: Reset game");
-    lastScore = score;
-    if (lastScore > highScore){
-        highScore = lastScore;  
-        if (highLast === "last"){  
-            highLastDisplay.innerHTML = "LAST: " + lastScore;    
-        }else{
-            highLastDisplay.innerHTML = "HIGH: " + highScore;
-        };
-    };
-    score = 0;
+    updateHLScore()
     //change display
     scoreDisplay.innerHTML = "PRESS START";
     
@@ -350,16 +341,7 @@ function resetGame() {
 
 function winning(){
     console.log("DEBUG: Winning!!");
-    lastScore = score;
-    if (lastScore > highScore){
-        highScore = lastScore;  
-        if (highLast === "last"){  
-            highLastDisplay.innerHTML = "LAST: " + lastScore;    
-        }else{
-            highLastDisplay.innerHTML = "HIGH: " + highScore;
-        };
-    };
-    score = 0;
+    updateHLScore()
     //AUDIO FANFARE
 
     //change display
@@ -370,6 +352,14 @@ function winning(){
 
 function gameOver(){
     console.log("DEBUG: Game Over");
+    updateHLScore()
+    //AUDIO looser tone
+    //change display
+    scoreDisplay.innerHTML = "YOU LOOSE!";
+
+
+}
+function updateHLScore(){
     lastScore = score;
     if (lastScore > highScore){
         highScore = lastScore;  
@@ -379,10 +369,4 @@ function gameOver(){
             highLastDisplay.innerHTML = "HIGH: " + highScore;
         };
     };
-    score = 0;
-    //AUDIO looser tone
-    //change display
-    scoreDisplay.innerHTML = "YOU LOOSE!";
-
-
-}
+    score = 0;}
