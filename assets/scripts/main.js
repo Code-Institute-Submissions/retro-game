@@ -33,6 +33,9 @@ let compPlayInterval;
 let round = 0;
 let loopCount = 0;
 
+//sound on by default.
+let sound = true;
+
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
 // strictDisplay is top left in the display window
@@ -294,28 +297,40 @@ function blueActive() {
     console.log("blueActive function");
     //Change backgroundcolor
     blueButton.style.backgroundColor = "#0040ff";
-    //*****add audio****
+    //Play blue audio
+    if (sound) {
+        blueAudio.play();
+    }
 }
 
 function yellowActive() {
     console.log("yellowActive function");
     //Change backgroundcolor
     yellowButton.style.backgroundColor = "#ffff00";
-    //*****add audio****
+    //Play yellow audio
+    if (sound) {
+        yellowAudio.play();
+    }
 }
 
 function redActive() {
     console.log("redActive function");
     //Change backgroundcolor
     redButton.style.backgroundColor = "#ff1a1a";
-    //*****add audio****
+    //play red audio
+    if (sound) {
+        redAudio.play();
+    }
 }
 
 function greenActive() {
     console.log("greenActive function");
     //change background color
     greenButton.style.backgroundColor = "#009900";
-    //*****add audio****
+    //play green audio
+    if (sound) {
+        greenAudio.play();
+    }
 }
 
 //return colors to deactivated state
@@ -370,4 +385,4 @@ function updateHLScore(){
             highLastDisplay.innerHTML = "HIGH: " + highScore;
         };
     };
-    score = 0;}
+    score = 0;} 
