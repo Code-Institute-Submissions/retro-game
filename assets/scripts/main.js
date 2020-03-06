@@ -299,7 +299,9 @@ function blueActive() {
     blueButton.style.backgroundColor = "#0040ff";
     //Play blue audio
     if (sound) {
-        blueAudio.play();
+        var aud=new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
+            aud.play();
+       // blueAudio.play();
     }
 }
 
@@ -309,6 +311,7 @@ function yellowActive() {
     yellowButton.style.backgroundColor = "#ffff00";
     //Play yellow audio
     if (sound) {
+
         yellowAudio.play();
     }
 }
