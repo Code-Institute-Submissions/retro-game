@@ -162,25 +162,14 @@ function compPlay() {
         clearInterval(compPlayInterval);
     }else if (sequence[j] === 1){
         blueActive();
-        setTimeout(() => {             
-            coloursNotActive();
-        }, 500);
     }else if (sequence[j] === 2){
         yellowActive();
-        setTimeout(() => {             
-            coloursNotActive();
-        }, 500);
     }else if (sequence[j] === 3){
         redActive();
-        setTimeout(() => {             
-            coloursNotActive();
-        }, 500);
     }else if (sequence[j] === 4){
         greenActive();
-        setTimeout(() => {             
-            coloursNotActive();
-        }, 500);
     }
+
     j++;
 };
 
@@ -299,9 +288,7 @@ function blueActive() {
     blueButton.style.backgroundColor = "#0040ff";
     //Play blue audio
     if (sound) {
-        var aud=new Audio("https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
-            aud.play();
-       // blueAudio.play();
+       blueAudio.play();
     }
 }
 
