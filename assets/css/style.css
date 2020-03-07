@@ -64,6 +64,52 @@ button {
     display: inline-block;
     margin-bottom:5vh;
 }
+/*=== Game Display=====*/ 
+.display {
+    background-color: Black;
+    color: green;
+    text-align: center;
+    height:15vh;
+    width: 45vh;
+    margin:auto;
+}
+#strict-display {
+    font-size: 2vh;
+    display: inline-block;
+    text-align: left;
+    margin-right:22vh;
+    margin-top: 0.2vh;
+    margin-bottom: .5vh;
+    margin-left: 0;
+}
+#high-last-display{
+    font-size: 2vh;
+    margin-top: 0.2vh;
+    margin-bottom: .5vh;
+    display: inline-block;
+    text-align: right;
+}
+#score-display {
+    font-size:6vh;
+    margin:.5vh;
+}
+#turn-display {
+    font-size: 2vh;
+    margin-top: 0.5vh;
+    display: inline-block;
+    text-align: right;
+}
+#skill-display {
+    font-size: 2vh;
+    display: inline-block;
+    text-align: left;
+    margin-right:18vh;
+    margin-top: .5vh;
+    margin-bottom: 0.5vh;
+    margin-left: 0;
+}
+
+
 
 
 
@@ -82,36 +128,9 @@ button {
     height:15vh;
 }
 
-/*=== Game Display=====*/ 
-.display {
-    background-color: Black;
-    color: green;
-    text-align: center;
-    height:15vh;
-    width:80%;
-    margin:auto;
-}
-#strict-display {
-    font-size: 2vh;
-    display: inline-block;
-    text-align: left;
-    margin-right:30%;
-    margin-top: 2%;
-    margin-bottom: 0;
-}
-#high-last-display{
-    font-size: 2vh;
-    margin-top: 2%;
-    display: inline-block;
-    text-align: right;
-}
-#score-display {
-    font-size:6vh;
-    margin:2%;
-}
-#skill-display {
-    font-size: 2vh;
-}
+
+
+
 /*---Strict Button---*/
 #strict {
     height:12%;

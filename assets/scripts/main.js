@@ -3,6 +3,7 @@
 let on = false;
 // Strict is always OFF when page is initially loaded.
 let strict = false;
+let strictLife = 0;
 // The computer always plays first 
 let compTurn = true;
 // The score always starts as 0 (maybe add compSequence.length)
@@ -42,6 +43,10 @@ const scoreDisplay = document.querySelector("#score-display");
 const strictDisplay = document.querySelector("#strict-display");
 // High / Last is displayed in the top right of the display window
 const highLastDisplay = document.querySelector("#high-last-display");
+
+const skillDisplay = document.querySelector("#skill-display");
+
+const turnDisplay = document.querySelector("#turn-display");
 // location of the On/Off button
 const onOffButton = document.querySelector("#on-off");
 // location of the Strict button
@@ -69,6 +74,16 @@ onOffButton.addEventListener('click', (event) => {
         start = false;
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "PRESS START";
+        if (!strict) {
+            strict = true;
+            strictDisplay.innerHTML = "STRICT: ON";
+        } else {
+            strict = false;
+            strictDisplay.innerHTML = "STRICT: OFF";
+        }
+        skillDisplay.innerHTML = "SKILL: EASY";
+        
+
         // Add further functions later
     } else {
         console.log("DEBUG: on/off button status: OFF"); //debug
@@ -76,6 +91,8 @@ onOffButton.addEventListener('click', (event) => {
         start = false;
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "OFF";
+        skillDisplay.innerHTML = " ";
+        turnDisplay.innerHTML = " ";
         updateHLScore() //update the high and last score (incase off button has been pressed mid game)
         // Add further functions later
     }
@@ -83,8 +100,8 @@ onOffButton.addEventListener('click', (event) => {
 
 // Strict ON or OFF - sets variable and changes text in display window
 strictButton.addEventListener('click', (event) => {
-    if (on === true && start === false) {
-        if (strict === false) {
+    if (on && !start) {
+        if (!strict) {
             strict = true;
             strictDisplay.innerHTML = "STRICT: ON";
         } else {
@@ -133,7 +150,10 @@ startResetButton.addEventListener('click', (event) => {
 //-----FUNCTIONS-----------//
 function playGame() {
     score = 0;
+    scoreDisplay.innerHTML = "SCORE: " + score;
+    turnDisplay.innerHTML = "COMP TURN";
     playerTurn = false;
+    strictLife = 0;
     playerSequence = []; //to hold the players input - cleared each turn
     compSequence = []; //to hold the computer input - incremented each turn
     sequence = []; // randomly generated
@@ -155,14 +175,16 @@ function playGame() {
 
 //Computers turn
 function compPlay() {
+    turnDisplay.innerHTML = "COMP TURN";
     setTimeout(() => {             
         coloursNotActive();
-    }, 500);
+    }, 400);
     loopCount = loopCount+1
     console.log("DEBUG: compPlay Function called" +loopCount); //debug
     if (j===round){
         j=0;
         playerTurn= true;
+        turnDisplay.innerHTML = "YOUR TURN";
         console.log("DEBUG: end compPlay - players turn");
         clearInterval(compPlayInterval);
     }else if (sequence[j] === 1){
@@ -188,7 +210,7 @@ blueButton.addEventListener('click', (event) => {
         playerSequence.push([1]);
         setTimeout(() => { 
             coloursNotActive();
-        }, 500);
+        }, 200);
         check();
     }
 });
@@ -200,7 +222,7 @@ yellowButton.addEventListener('click', (event) => {
         playerSequence.push([2]);
         setTimeout(() => { 
             coloursNotActive();
-        }, 500);
+        }, 200);
         check();
     }
 });
@@ -213,7 +235,7 @@ redButton.addEventListener('click', (event) => {
         playerSequence.push([3]);
         setTimeout(() => { 
             coloursNotActive();
-        }, 500);
+        }, 200);
         check();
     }
 });
@@ -262,12 +284,14 @@ function check() {
         //clear colours after .5s 
         setTimeout(() => { 
             coloursNotActive();
+            turnDisplay.innerHTML = "COMP TURN";
         }, 500);
         round++;
+        
         //run compPlay() every 1s until clear interval is called. 
         setTimeout(() => { 
         compPlayInterval = setInterval(compPlay,1000);
-        }, 1400);
+        }, 1300);
     } else if (playerCorrect ===  true){
         playerTurn = true; //continue listening for the rest of the sequence
     } else if (strict === false) {
@@ -277,6 +301,7 @@ function check() {
         playerTurn = false;
         j=0;//added here so whole sequence is repeated in compPlay
         //clear colours after .5s
+        strictLife = 1;
         scoreDisplay.innerHTML = "INCORRECT";
         setTimeout(() => { 
             coloursNotActive();
@@ -352,6 +377,10 @@ function coloursNotActive() {
 function resetGame() {
     console.log("DEBUG: Reset game");
     updateHLScore();
+    //if not in strict mode - and life used. give life back for next game.
+    if (strictLife === 1){
+        strict = false;
+    }
     //change display
     scoreDisplay.innerHTML = "PRESS START";
     
@@ -384,11 +413,13 @@ function gameOver(){
 function updateHLScore(){
     lastScore = score;
     if (lastScore > highScore){
-        highScore = lastScore;  
-        if (highLast === "last"){  
+        highScore = lastScore; 
+    } 
+        
+    if (highLast === "last"){  
             highLastDisplay.innerHTML = "LAST: " + lastScore;    
-        }else{
+    }else{
             highLastDisplay.innerHTML = "HIGH: " + highScore;
-        };
-    };
-    score = 0;} 
+    }
+  
+    } 
