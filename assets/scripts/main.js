@@ -66,12 +66,17 @@ onOffButton.addEventListener('click', (event) => {
     if (on === false) {
         console.log("DEBUG: on/off button status: ON"); //debug
         on = true;
+        start = false;
+        startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "PRESS START";
         // Add further functions later
     } else {
         console.log("DEBUG: on/off button status: OFF"); //debug
         on = false;
+        start = false;
+        startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "OFF";
+        updateHLScore() //update the high and last score (incase off button has been pressed mid game)
         // Add further functions later
     }
 });
@@ -260,7 +265,9 @@ function check() {
         }, 500);
         round++;
         //run compPlay() every 1s until clear interval is called. 
+        setTimeout(() => { 
         compPlayInterval = setInterval(compPlay,1000);
+        }, 1400);
     } else if (playerCorrect ===  true){
         playerTurn = true; //continue listening for the rest of the sequence
     } else if (strict === false) {
@@ -268,12 +275,20 @@ function check() {
         playerSequence = [];//empty players sequence
         strict = true;// life used up
         playerTurn = false;
+        j=0;//added here so whole sequence is repeated in compPlay
         //clear colours after .5s
+        scoreDisplay.innerHTML = "INCORRECT";
         setTimeout(() => { 
             coloursNotActive();
-        }, 500);
+            scoreDisplay.innerHTML = "TRY AGAIN";
+        }, 700);
+        setTimeout(() => { 
+            coloursNotActive();
+        }, 1400);
         //run compPlay() every 1s until clear intaval is called.
-        compPlayInterval = setInterval(compPlay,1000);compPlay();
+        setTimeout(() => { 
+            compPlayInterval = setInterval(compPlay,1000);compPlay();
+        }, 2000);
     } else {
         console.log("game over");
         gameOver();
@@ -357,10 +372,11 @@ function winning(){
 
 function gameOver(){
     console.log("DEBUG: Game Over");
+    playerTurn = false;
     updateHLScore();
     //AUDIO looser tone
     //change display
-    scoreDisplay.innerHTML = "YOU LOOSE!";
+    scoreDisplay.innerHTML = "YOU LOSE!";
 
 
 }

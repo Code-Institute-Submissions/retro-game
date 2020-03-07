@@ -19,12 +19,9 @@ This is a memory game where the player must replicate a sequence. A light and ac
  
 ## UX
  
-Use this section to provide insight into your UX process, focusing on who this website is for, what it is that they want to achieve and how your project is the best way to help them achieve these things.
-********************************
 
 Game Panel display - Much of the HTML and CSS development time was spent developing the game panel. I wanted to ensure that the panel was close to the design of the original Atari game to provide the retro feel, whilst providing a good user interface on mobile and desktop devices. Therefore I have removed / combined some buttons and made some buttons larger than others. I quickly realised that bootstrap was not very useful for this project. This meant that I had to be creative with my use of CSS. I spent some time working with view height and view width parameters to ensure the game panel appeared well on all devices and buttons images etc were responsive and remained in proportion.
 
-*****************************
 
 ## User Stories
 
@@ -58,13 +55,13 @@ Game Panel display - Much of the HTML and CSS development time was spent develop
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 assets\links\Atari-TouchMe.pdf 
 
-Click here for [Wireframes](\assets\links\retro-game-mockups.pdf).
+Click here for [Wireframes](.\assets\links\retro-game-mockups.pdf).
 
-Click here for [Game flow](\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [Game flow](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [compPlay()](\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [compPlay()](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [check()](\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [check()](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
 
 ## Features
 
@@ -103,10 +100,11 @@ In addition, you may also use this section to discuss plans for additional featu
 
 ## Technologies Used
 
-In this section, you should mention all of the languages, frameworks, libraries, and any other tools that you have used to construct this project. For each, provide its name, a link to its official site and a short sentence of why it was used.
+I have used:
 
-- [JQuery](https://jquery.com)
-    - The project uses **JQuery** to simplify DOM manipulation.
+HTML5
+CSS3
+Javascript
 
 
 ## Testing
