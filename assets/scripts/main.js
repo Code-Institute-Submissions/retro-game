@@ -75,13 +75,13 @@ onOffButton.addEventListener('click', (event) => {
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "PRESS START";
         if (!strict) {
-            strict = true;
-            strictDisplay.innerHTML = "STRICT: ON";
+            strictDisplay.innerHTML = "STRICT: OFF"
         } else {
-            strict = false;
-            strictDisplay.innerHTML = "STRICT: OFF";
+            strictDisplay.innerHTML = "STRICT: ON"            
         }
         skillDisplay.innerHTML = "SKILL: EASY";
+        highLastDisplay.innerHTML = "LAST: " + lastScore;    
+
         
 
         // Add further functions later
