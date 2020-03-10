@@ -186,18 +186,8 @@ function compPlay() {
         clearInterval(compPlayInterval);
     } else {
         console.log("DEBUG: coloursActive Function called" + seqPoint); //debug
-        colourActive(sequence[seqPoint]);
+        colourActive(sequence[seqPoint]);//highlights colour and plays sound.
     }
-    /*if (sequence[seqPoint] === 1) {
-        blueActive();
-    } else if (sequence[seqPoint] === 2) {
-        yellowActive();
-    } else if (sequence[seqPoint] === 3) {
-        redActive();
-    } else if (sequence[seqPoint] === 4) {
-        greenActive();
-    }*/
-
     seqPoint++;
 };
 
@@ -207,44 +197,21 @@ function compPlay() {
 blueButton.addEventListener('click', (event) => {
     console.log("DEBUG: player turn Blue pressed"); //debug
     colourPressed(1);
-    /*if (playerTurn === true) {
-        
-        blueActive();
-        playerSequence.push([1]);
-        setTimeout(() => { 
-            coloursNotActive();
-        }, 200);
-        check();
-    }*/
 });
 //Yellow button functionality - only listening during players turn
 yellowButton.addEventListener('click', (event) => {
     console.log("DEBUG: player turn Yellow pressed"); //debug
     colourPressed(2);
-    /*if (playerTurn === true) {
-        
-        yellowActive();
-        playerSequence.push([2]);
-        setTimeout(() => { 
-            coloursNotActive();
-        }, 200);
-        check();
-    }*/
 });
 //Red button functionality - only listening during players turn
 redButton.addEventListener('click', (event) => {
-    //colour = 3;
     console.log("DEBUG: player turn Red pressed"); //debug
     colourPressed(3);
-    /*   if (playerTurn === true) {
-            console.log("DEBUG: player turn Red pressed"); //debug
-            redActive();
-            playerSequence.push([3]);
-            setTimeout(() => { 
-                coloursNotActive();
-            }, 200);
-            check();
-        }*/
+});
+//Green button functionality - only listening during players turn
+greenButton.addEventListener('click', (event) => {
+    colourPressed(4);
+    console.log("DEBUG: player turn Green pressed"); //debug
 });
 
 function colourPressed(colour) {
@@ -260,24 +227,8 @@ function colourPressed(colour) {
 
 }
 
-//Green button functionality - only listening during players turn
-greenButton.addEventListener('click', (event) => {
-    colourPressed(4);
-    console.log("DEBUG: player turn Green pressed"); //debug
-    /*if (playerTurn === true) {
-         
-         greenActive();
-         playerSequence.push([4]);
-         setTimeout(() => { 
-             coloursNotActive();
-         }, 500);
-         check();
-     }*/
-});
-
-
 //============CHECK FUNCTION=============================//
-//Check Function is called from the coloured button eventlisteners
+//Check Function is called from the colourPressed() function.
 //this checks the players input against the computer sequence.
 function check() {
     console.log("check function");
@@ -292,12 +243,11 @@ function check() {
         console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
     }
 
-
-    if (playerCorrect === true && sequence.length === playerSequence.length) {
+    if (playerCorrect && sequence.length === playerSequence.length) {
         score = score + 1;
         console.log("player wins!");
         winning();
-    } else if (playerCorrect === true && playerSequence.length === round) {
+    } else if (playerCorrect && playerSequence.length === round) {
         console.log("player correct comp to play!");
         playerTurn = false; //correct sequence comp turn
         score = score + 1;
@@ -310,14 +260,13 @@ function check() {
             turnDisplay.innerHTML = "COMP TURN";
         }, 500);
         round++;
-
         //run compPlay() every 1s until clear interval is called. 
         setTimeout(() => {
             compPlayInterval = setInterval(compPlay, 1000);
         }, 1300);
-    } else if (playerCorrect === true) {
+    } else if (playerCorrect) {
         playerTurn = true; //continue listening for the rest of the sequence
-    } else if (strict === false) {
+    } else if (!strict) {
         console.log("strict active player gets second chance");
         playerSequence = []; //empty players sequence
         strict = true; // life used up
@@ -332,89 +281,30 @@ function check() {
         }, 700);
         setTimeout(() => {
             coloursNotActive();
-        }, 1400);
+        }, 1300);
         //run compPlay() every 1s until clear intaval is called.
         setTimeout(() => {
             compPlayInterval = setInterval(compPlay, 1000);
-            compPlay();
         }, 2000);
     } else {
         console.log("game over");
         gameOver();
     }
 }
-//=========COLOUR ACTIVATION FUNCTIONS==============//
-
-function colourActive(seqPoint) {
-    if (seqPoint === 1) {
-        blueButton.style.backgroundColor = "#0040ff";
-        //Play blue audio
-        if (sound) {
-            blueAudio.play();
-        }
-    } else if (seqPoint === 2) {
-        yellowButton.style.backgroundColor = "#ffff00";
-        //Play yellow audio
-        if (sound) {
-            yellowAudio.play();
-        }
-    } else if (seqPoint === 3) {
-        redButton.style.backgroundColor = "#ff1a1a";
-        //play red audio
-        if (sound) {
-            redAudio.play();
-        }
-    } else if (seqPoint === 4) {
-        greenButton.style.backgroundColor = "#009900";
-        //play green audio
-        if (sound) {
-            greenAudio.play();
-        }
-    }
-}
-/*
+//=========COLOUR ACTIVATION==============//
 //highlight quadrant and play note .. Called during the computers turn and the players turn
-function blueActive() {
-    console.log("blueActive function");
-    //Change backgroundcolor
-    blueButton.style.backgroundColor = "#0040ff";
-    //Play blue audio
-    if (sound) {
-       blueAudio.play();
+function colourActive(colour) {
+    let colourButton = [blueButton, yellowButton, redButton, greenButton];
+    let bgColour = ["#0040ff", "#ffff00", "#ff1a1a", "#009900"];
+    let colourSound = [blueAudio, yellowAudio, redAudio, greenAudio];
+    //highlight colour background
+    colourButton[colour-1].style.backgroundColor= bgColour[colour-1];
+    //play colour sound
+    if (sound){
+        colourSound[colour-1].play();
     }
 }
-
-function yellowActive() {
-    console.log("yellowActive function");
-    //Change backgroundcolor
-    yellowButton.style.backgroundColor = "#ffff00";
-    //Play yellow audio
-    if (sound) {
-        yellowAudio.play();
-    }
-}
-
-function redActive() {
-    console.log("redActive function");
-    //Change backgroundcolor
-    redButton.style.backgroundColor = "#ff1a1a";
-    //play red audio
-    if (sound) {
-        redAudio.play();
-    }
-}
-
-function greenActive() {
-    console.log("greenActive function");
-    //change background color
-    greenButton.style.backgroundColor = "#009900";
-    //play green audio
-    if (sound) {
-        greenAudio.play();
-    }
-}
-*/
-//return colors to deactivated state
+//return colours to deactivated state
 function coloursNotActive() {
     console.log("DEBUG: Deactivate colours");
     blueButton.style.backgroundColor = "#0040ff88";
