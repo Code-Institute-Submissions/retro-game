@@ -11,6 +11,7 @@ body {
 }
 button {
     font-size:2vh;
+    color: grey;
 }
 .intro {
     height:100vh;

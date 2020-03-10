@@ -14,6 +14,8 @@ let highLast = "last";
 //set HIGH and LAST to zero when the page is first loaded
 let highScore = 0;
 let lastScore = 0;
+// set SKILL to easy when page loads
+let skill = 1;
 
 // The Game is not started when the page loads
 let start = false;
@@ -60,6 +62,8 @@ const strictButton = document.querySelector("#strict");
 const highLastButton = document.querySelector("#high-last");
 // location of Start/Reset Button
 const startResetButton = document.querySelector("#start-reset");
+// location of SKILL button
+const skillButton = document.querySelector("#skill-button");
 // location of Blue Button
 const blueButton = document.querySelector("#blue");
 // location of Yellow Button
@@ -76,6 +80,10 @@ onOffButton.addEventListener('click', (event) => {
     if (on === false) {
         console.log("DEBUG: on/off button status: ON"); //debug
         on = true;
+        let buttonArray= [strictButton,highLastButton,startResetButton,skillButton]
+        for(i=0; i<buttonArray.length; i++){
+            buttonArray[i].style.color="black";
+        }
         start = false;
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "PRESS START";
@@ -84,13 +92,22 @@ onOffButton.addEventListener('click', (event) => {
         } else {
             strictDisplay.innerHTML = "STRICT: ON"
         }
-        skillDisplay.innerHTML = "SKILL: EASY";
+        if (skill === 1){
+            skillDisplay.innerHTML = "SKILL: EASY";
+        }else if(skill === 2){
+            skillDisplay.innerHTML = "SKILL: NORM";
+        }else if(skill === 3){
+            skillDisplay.innerHTML = "SKILL: HARD";
+        }
         displayHighLast();
         // Add further functions later
     } else {
         console.log("DEBUG: on/off button status: OFF"); //debug
         on = false;
         start = false;
+        let buttonArray= [strictButton,highLastButton,startResetButton,skillButton]
+        for(i=0; i<buttonArray.length; i++){
+            buttonArray[i].style.color="grey";}
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "OFF";
         skillDisplay.innerHTML = " ";
@@ -130,7 +147,7 @@ highLastButton.addEventListener('click', (event) => {
 
 //start/reset Button functionality
 startResetButton.addEventListener('click', (event) => {
-    if (on === true) {
+    if (on) {
         if (start === false) {
             console.log("DEBUG: start game"); //debug
             start = true;
@@ -147,7 +164,24 @@ startResetButton.addEventListener('click', (event) => {
     }
 });
 
-//=================PLAYER TURN EVENT LISTNERS===============
+//SKILL button - toggles between skill levels
+skillButton.addEventListener('click', (event) => {
+    if (on && !start) {
+        if (skill === 1){
+            skill = 2;
+            skillDisplay.innerHTML = "SKILL: NORM";
+        }else if(skill === 2){
+            skill = 3;
+            skillDisplay.innerHTML = "SKILL: HARD";
+        }else if(skill === 3){
+            skill = 1;
+            skillDisplay.innerHTML = "SKILL: EASY";
+        }
+    }
+
+});
+
+//=================PLAYER TURN EVENT LISTNERS===============//
 
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
@@ -174,6 +208,8 @@ greenButton.addEventListener('click', (event) => {
 
 
 //-----FUNCTIONS-----------//
+
+//==========START GAME=============//
 function startGame() {
     score = 0;
     scoreDisplay.innerHTML = "SCORE: " + score;
@@ -184,25 +220,39 @@ function startGame() {
     sequence = []; // randomly generated
     seqPoint = 0;
     console.log("DEBUG: startGame Function"); //debug
-    generateSequence();
+    let seqLength = 0;
+    console
+    switch (skill){
+        case 1: 
+            seqLength = 8;
+            break;
+        case 2: 
+            seqLength = 16;
+            break;
+        case 3: 
+            seqLength = 32;
+            break;
+    }
+    generateSequence(seqLength);
     //computers turn first
     round = 1; // round 1 play first part of sequence 
     compPlayInterval = setInterval(compPlay, 1000); //play sequence for the player to copy and then set playerTurn = true
 };
 
-function generateSequence(){
+//==============GENERATE SEQUENCE=========================//
+function generateSequence(seqLength){
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < seqLength; i++) {
         //math.random returns number between 0 and 1. 
         //I have multiplied this by 4 and then use math.floor to round it down to the nearest whole number.
         //I have then added 1. This ensures that the number is always between 1 and 4
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
-    console.log("DEBUG: play game function: sequence = " + sequence); //for debug
+    console.log("DEBUG: generate Sequence function: sequence = " + sequence); //for debug
 
 }
-
+//===============COMP TURN===============================//
 //Computers turn
 function compPlay() {
     turnDisplay.innerHTML = "COMP TURN";
@@ -215,7 +265,7 @@ function compPlay() {
         playerTurn = true;
         turnDisplay.innerHTML = "YOUR TURN";
         console.log("DEBUG: end compPlay - players turn");
-        idleDelayInterval = setInterval(idleDelay, 3000);
+        idleDelayInterval = setInterval(idleDelay, 3300);
         clearInterval(compPlayInterval);
     } else {
         console.log("DEBUG: coloursActive Function called" + seqPoint); //debug
@@ -224,22 +274,24 @@ function compPlay() {
     seqPoint++;
 };
 
+//===============IDLE DELAY===================================//
+//reminds player of sequence if there are no button presses for 10s 
 function idleDelay() {
     if (!playerTurn) {
         clearInterval(idleDelayInterval);
         idleCount = 0;
-    } else if (idleCount === 5) {
+    } else if (idleCount === 3 && on) {
         clearInterval(idleDelayInterval);
         playerSequence = [];
         idleCount = 0;
         seqPoint = 0;
         timeoutCount++;
-        if (timeoutCount < 4) {
+        if (timeoutCount < 4) { 
             scoreDisplay.innerHTML = "TIME OUT";
             setTimeout(() => {
                 coloursNotActive();
                 scoreDisplay.innerHTML = "TRY AGAIN";
-            }, 1000);
+            }, 1500);
             setTimeout(() => {
                 coloursNotActive();
             }, 1500);
