@@ -3,13 +3,15 @@
 let on = false;
 // Strict is always OFF when page is initially loaded.
 let strict = false;
-let strictLife = 0;
+// If stict is OFF and the second chance is used this becomes 1.
+let lifeUsed = 0;
 // The computer always plays first 
 let compTurn = true;
 // The score always starts as 0 (maybe add compSequence.length)
 let score = 0;
 // The last score is always displayed when the page is initally loaded (More work needed here?)
 let highLast = "last";
+//set HIGH and LAST to zero when the page is first loaded
 let highScore = 0;
 let lastScore = 0;
 
@@ -18,23 +20,20 @@ let start = false;
 
 //computer always goes first
 let playerTurn = false;
-
+//Used in the check() function to determine when the player is correct.
 let playerCorrect = false;
 
 //Array to hold random sequence
 let sequence = [];
-//Array to hold computer sequence (1 added from random sequence each turn)
-let compSequence = [];
 //Array to hold player sequence ()
 let playerSequence = [];
-
-let j =0;
-let k=0;
+//seqPoint is used to determine the part of the sequence should be activated in compPlay.
+let seqPoint = 0;
+//compPlatInterval is used to set interval timer to run compPlay every 1 second
 let compPlayInterval;
+//round is used to determine where the game is upto where in the sequence the game is at.
 let round = 0;
-let loopCount = 0;
-
-//sound on by default.
+//****sound on by default*** NOT YET IMPLEMENTED*** sound OFF function.
 let sound = true;
 
 // scoreDisplay is the central display in the display window
@@ -43,9 +42,9 @@ const scoreDisplay = document.querySelector("#score-display");
 const strictDisplay = document.querySelector("#strict-display");
 // High / Last is displayed in the top right of the display window
 const highLastDisplay = document.querySelector("#high-last-display");
-
+// SKill displayed in bottom left of the display window
 const skillDisplay = document.querySelector("#skill-display");
-
+// COMP TURN or YOUR TURN displayed in bottom rightof the display window
 const turnDisplay = document.querySelector("#turn-display");
 // location of the On/Off button
 const onOffButton = document.querySelector("#on-off");
@@ -77,12 +76,12 @@ onOffButton.addEventListener('click', (event) => {
         if (!strict) {
             strictDisplay.innerHTML = "STRICT: OFF"
         } else {
-            strictDisplay.innerHTML = "STRICT: ON"            
+            strictDisplay.innerHTML = "STRICT: ON"
         }
         skillDisplay.innerHTML = "SKILL: EASY";
-        highLastDisplay.innerHTML = "LAST: " + lastScore;    
+        highLastDisplay.innerHTML = "LAST: " + lastScore;
 
-        
+
 
         // Add further functions later
     } else {
@@ -133,7 +132,7 @@ startResetButton.addEventListener('click', (event) => {
             start = true;
             startResetButton.innerHTML = "RESET";
             scoreDisplay.innerHTML = "SCORE: " + score;
-            playGame();
+            startGame();
         } else {
             console.log("DEBUG: reset game"); //debug
             start = false;
@@ -148,17 +147,16 @@ startResetButton.addEventListener('click', (event) => {
 
 
 //-----FUNCTIONS-----------//
-function playGame() {
+function startGame() {
     score = 0;
     scoreDisplay.innerHTML = "SCORE: " + score;
     turnDisplay.innerHTML = "COMP TURN";
     playerTurn = false;
-    strictLife = 0;
+    lifeUsed = 0;
     playerSequence = []; //to hold the players input - cleared each turn
-    compSequence = []; //to hold the computer input - incremented each turn
     sequence = []; // randomly generated
-    j =0;
-    console.log("DEBUG: playGame Function"); //debug
+    seqPoint = 0;
+    console.log("DEBUG: startGame Function"); //debug
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
     for (i = 0; i < 8; i++) {
@@ -170,86 +168,111 @@ function playGame() {
     console.log("DEBUG: play game function: sequence = " + sequence); //for debug
     //computers turn first
     round = 1; // round 1 play first part of sequence 
-    compPlayInterval = setInterval(compPlay,100); //play sequence for the player to copy and then set playerTurn = true
+    compPlayInterval = setInterval(compPlay, 1000); //play sequence for the player to copy and then set playerTurn = true
 };
 
 //Computers turn
 function compPlay() {
     turnDisplay.innerHTML = "COMP TURN";
-    setTimeout(() => {             
+    setTimeout(() => {
         coloursNotActive();
     }, 400);
-    loopCount = loopCount+1
-    console.log("DEBUG: compPlay Function called" +loopCount); //debug
-    if (j===round){
-        j=0;
-        playerTurn= true;
+    console.log("DEBUG: compPlay Function called"); //debug
+    if (seqPoint === round) {
+        seqPoint = 0;
+        playerTurn = true;
         turnDisplay.innerHTML = "YOUR TURN";
         console.log("DEBUG: end compPlay - players turn");
         clearInterval(compPlayInterval);
-    }else if (sequence[j] === 1){
-        blueActive();
-    }else if (sequence[j] === 2){
-        yellowActive();
-    }else if (sequence[j] === 3){
-        redActive();
-    }else if (sequence[j] === 4){
-        greenActive();
+    } else {
+        console.log("DEBUG: coloursActive Function called" + seqPoint); //debug
+        colourActive(sequence[seqPoint]);
     }
+    /*if (sequence[seqPoint] === 1) {
+        blueActive();
+    } else if (sequence[seqPoint] === 2) {
+        yellowActive();
+    } else if (sequence[seqPoint] === 3) {
+        redActive();
+    } else if (sequence[seqPoint] === 4) {
+        greenActive();
+    }*/
 
-    j++;
+    seqPoint++;
 };
 
 //=================PLAYER TURN EVENT LISTNERS===============
 
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        console.log("DEBUG: player turn Blue pressed"); //debug
+    console.log("DEBUG: player turn Blue pressed"); //debug
+    colourPressed(1);
+    /*if (playerTurn === true) {
+        
         blueActive();
         playerSequence.push([1]);
         setTimeout(() => { 
             coloursNotActive();
         }, 200);
         check();
-    }
+    }*/
 });
 //Yellow button functionality - only listening during players turn
 yellowButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        console.log("DEBUG: player turn Yellow pressed"); //debug
+    console.log("DEBUG: player turn Yellow pressed"); //debug
+    colourPressed(2);
+    /*if (playerTurn === true) {
+        
         yellowActive();
         playerSequence.push([2]);
         setTimeout(() => { 
             coloursNotActive();
         }, 200);
         check();
-    }
+    }*/
 });
 //Red button functionality - only listening during players turn
 redButton.addEventListener('click', (event) => {
+    //colour = 3;
+    console.log("DEBUG: player turn Red pressed"); //debug
+    colourPressed(3);
+    /*   if (playerTurn === true) {
+            console.log("DEBUG: player turn Red pressed"); //debug
+            redActive();
+            playerSequence.push([3]);
+            setTimeout(() => { 
+                coloursNotActive();
+            }, 200);
+            check();
+        }*/
+});
+
+function colourPressed(colour) {
     if (playerTurn === true) {
-        console.log("DEBUG: player turn Red pressed"); //debug
-        redActive();
-        setTimeout
-        playerSequence.push([3]);
-        setTimeout(() => { 
+        console.log("DEBUG: player turn colour pressed" + colour); //debug
+        colourActive(colour);
+        playerSequence.push([colour]);
+        setTimeout(() => {
             coloursNotActive();
         }, 200);
         check();
     }
-});
+
+}
+
 //Green button functionality - only listening during players turn
 greenButton.addEventListener('click', (event) => {
-    if (playerTurn === true) {
-        console.log("DEBUG: player turn Green pressed"); //debug
-        greenActive();
-        playerSequence.push([4]);
-        setTimeout(() => { 
-            coloursNotActive();
-        }, 500);
-        check();
-    }
+    colourPressed(4);
+    console.log("DEBUG: player turn Green pressed"); //debug
+    /*if (playerTurn === true) {
+         
+         greenActive();
+         playerSequence.push([4]);
+         setTimeout(() => { 
+             coloursNotActive();
+         }, 500);
+         check();
+     }*/
 });
 
 
@@ -266,12 +289,12 @@ function check() {
         } else {
             playerCorrect = true;
         }
-          console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
+        console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
     }
-    
+
 
     if (playerCorrect === true && sequence.length === playerSequence.length) {
-        score = score+1;
+        score = score + 1;
         console.log("player wins!");
         winning();
     } else if (playerCorrect === true && playerSequence.length === round) {
@@ -279,40 +302,41 @@ function check() {
         playerTurn = false; //correct sequence comp turn
         score = score + 1;
         scoreDisplay.innerHTML = "SCORE: " + score;
-        playerSequence = [];//empty players sequence
-        j=0;//added here as appeared to be starting from 1 in compPlay
+        playerSequence = []; //empty players sequence
+        seqPoint = 0; //added here as appeared to be starting from 1 in compPlay
         //clear colours after .5s 
-        setTimeout(() => { 
+        setTimeout(() => {
             coloursNotActive();
             turnDisplay.innerHTML = "COMP TURN";
         }, 500);
         round++;
-        
+
         //run compPlay() every 1s until clear interval is called. 
-        setTimeout(() => { 
-        compPlayInterval = setInterval(compPlay,1000);
+        setTimeout(() => {
+            compPlayInterval = setInterval(compPlay, 1000);
         }, 1300);
-    } else if (playerCorrect ===  true){
+    } else if (playerCorrect === true) {
         playerTurn = true; //continue listening for the rest of the sequence
     } else if (strict === false) {
         console.log("strict active player gets second chance");
-        playerSequence = [];//empty players sequence
-        strict = true;// life used up
+        playerSequence = []; //empty players sequence
+        strict = true; // life used up
         playerTurn = false;
-        j=0;//added here so whole sequence is repeated in compPlay
+        seqPoint = 0; //added here so whole sequence is repeated in compPlay
         //clear colours after .5s
-        strictLife = 1;
+        lifeUsed = 1;
         scoreDisplay.innerHTML = "INCORRECT";
-        setTimeout(() => { 
+        setTimeout(() => {
             coloursNotActive();
             scoreDisplay.innerHTML = "TRY AGAIN";
         }, 700);
-        setTimeout(() => { 
+        setTimeout(() => {
             coloursNotActive();
         }, 1400);
         //run compPlay() every 1s until clear intaval is called.
-        setTimeout(() => { 
-            compPlayInterval = setInterval(compPlay,1000);compPlay();
+        setTimeout(() => {
+            compPlayInterval = setInterval(compPlay, 1000);
+            compPlay();
         }, 2000);
     } else {
         console.log("game over");
@@ -321,6 +345,34 @@ function check() {
 }
 //=========COLOUR ACTIVATION FUNCTIONS==============//
 
+function colourActive(seqPoint) {
+    if (seqPoint === 1) {
+        blueButton.style.backgroundColor = "#0040ff";
+        //Play blue audio
+        if (sound) {
+            blueAudio.play();
+        }
+    } else if (seqPoint === 2) {
+        yellowButton.style.backgroundColor = "#ffff00";
+        //Play yellow audio
+        if (sound) {
+            yellowAudio.play();
+        }
+    } else if (seqPoint === 3) {
+        redButton.style.backgroundColor = "#ff1a1a";
+        //play red audio
+        if (sound) {
+            redAudio.play();
+        }
+    } else if (seqPoint === 4) {
+        greenButton.style.backgroundColor = "#009900";
+        //play green audio
+        if (sound) {
+            greenAudio.play();
+        }
+    }
+}
+/*
 //highlight quadrant and play note .. Called during the computers turn and the players turn
 function blueActive() {
     console.log("blueActive function");
@@ -338,7 +390,6 @@ function yellowActive() {
     yellowButton.style.backgroundColor = "#ffff00";
     //Play yellow audio
     if (sound) {
-
         yellowAudio.play();
     }
 }
@@ -362,14 +413,14 @@ function greenActive() {
         greenAudio.play();
     }
 }
-
+*/
 //return colors to deactivated state
 function coloursNotActive() {
-        console.log("DEBUG: Deactivate colours");
-        blueButton.style.backgroundColor = "#0040ff88";
-        yellowButton.style.backgroundColor = "#ffff0088";
-        redButton.style.backgroundColor = "#ff1a1a88";
-        greenButton.style.backgroundColor = "#00990088";
+    console.log("DEBUG: Deactivate colours");
+    blueButton.style.backgroundColor = "#0040ff88";
+    yellowButton.style.backgroundColor = "#ffff0088";
+    redButton.style.backgroundColor = "#ff1a1a88";
+    greenButton.style.backgroundColor = "#00990088";
 }
 
 //========RESET GAME=========================//
@@ -378,17 +429,17 @@ function resetGame() {
     console.log("DEBUG: Reset game");
     updateHLScore();
     //if not in strict mode - and life used. give life back for next game.
-    if (strictLife === 1){
+    if (lifeUsed === 1) {
         strict = false;
     }
     //change display
     scoreDisplay.innerHTML = "PRESS START";
-    
+
 }
 
 //==========PLAYER WINS FUNCTION=============//
 
-function winning(){
+function winning() {
     console.log("DEBUG: Winning!!");
     updateHLScore();
     //AUDIO FANFARE
@@ -399,7 +450,7 @@ function winning(){
 
 //===============GAME OVER=================//
 
-function gameOver(){
+function gameOver() {
     console.log("DEBUG: Game Over");
     playerTurn = false;
     updateHLScore();
@@ -410,16 +461,14 @@ function gameOver(){
 
 }
 //---Function to update high and last scores-----//
-function updateHLScore(){
+function updateHLScore() {
     lastScore = score;
-    if (lastScore > highScore){
-        highScore = lastScore; 
-    } 
-        
-    if (highLast === "last"){  
-            highLastDisplay.innerHTML = "LAST: " + lastScore;    
-    }else{
-            highLastDisplay.innerHTML = "HIGH: " + highScore;
+    if (lastScore > highScore) {
+        highScore = lastScore;
     }
-  
-    } 
+    if (highLast === "last") {
+        highLastDisplay.innerHTML = "LAST: " + lastScore;
+    } else {
+        highLastDisplay.innerHTML = "HIGH: " + highScore;
+    }
+}
