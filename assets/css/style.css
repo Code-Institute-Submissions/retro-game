@@ -6,7 +6,7 @@ font-family: 'Chango', ;*/
 body {
     margin:0 auto;
     background-color: black;
-    font-family: 'Chango', ;
+    font-family: 'Press Start 2P', serif ;
     color: #fff;
 }
 button {
@@ -21,14 +21,11 @@ button {
 
 
 }
-#intro-image{
-    height:75vh;
-    padding:0px;
-}
+
 /*--Div containing Game = determines the size, ensures proportion--*/
 .center-column{
     width:55vh;
-    height:95vh;
+    height:85vh;
     margin:0 auto;
     padding:0;    
 }
@@ -54,8 +51,9 @@ button {
     
   }
 #logo {
-    height:12vh;
+    height:11vh;
     display: inline-block;
+    font-family: 'Chango', serif;
     margin:0;
 
 }
@@ -64,9 +62,11 @@ button {
     color: black;
     display: inline-block;
     margin-bottom:5vh;
+    font-family: 'Chango', serif;
 }
 /*=== Game Display=====*/ 
 .display {
+    position: relative;
     background-color: Black;
     color: green;
     text-align: center;
@@ -75,39 +75,53 @@ button {
     margin:auto;
 }
 #strict-display {
-    font-size: 2vh;
+    top:.5vh;
+    left:.5vh;
+    position: absolute;
+    font-size: 1.7vh;
     display: inline-block;
     text-align: left;
-    margin-right:22vh;
     margin-top: 0.2vh;
     margin-bottom: .5vh;
     margin-left: 0;
+    width:50%;
+    
 }
 #high-last-display{
-    font-size: 2vh;
+    top:.5vh;
+    right:.5vh;
+    position: absolute;
+    font-size: 1.7vh;
     margin-top: 0.2vh;
     margin-bottom: .5vh;
     display: inline-block;
     text-align: right;
+    width:50%;
 }
 #score-display {
-    font-size:6vh;
-    margin:.5vh;
+    top: 5vh;
+    margin: 0 auto;
+    position: absolute;
+    right:0;
+    left:0;
+    font-size:4vh;
 }
 #turn-display {
-    font-size: 2vh;
+    bottom:.5vh;
+    right:.5vh;
+    position: absolute;
+    font-size: 1.7vh;
     margin-top: 0.5vh;
     display: inline-block;
     text-align: right;
 }
 #skill-display {
-    font-size: 2vh;
+    bottom: .5vh;
+    left:.5vh;
+    position: absolute;
+    font-size: 1.7vh;
     display: inline-block;
     text-align: left;
-    margin-right:18vh;
-    margin-top: .5vh;
-    margin-bottom: 0.5vh;
-    margin-left: 0;
 }
 
 
@@ -126,7 +140,7 @@ button {
 }
 /*==Bottom of Game panel = ON/OFF switch and Skill button==*/
 .bottom{
-    height:15vh;
+    height:10vh;
 }
 
 
@@ -245,3 +259,10 @@ button {
 .history {
     height: 100vh;
 }
+
+/*============HOW TO PLAY ================*/
+.touch-image {
+    margin: 0 auto;
+    text-align: center;   
+}
+

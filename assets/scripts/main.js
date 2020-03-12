@@ -42,7 +42,7 @@ let sound = true;
 let idleCount = 0;
 //used as set interval timer for idleCount.
 let idleDelayInterval;
-
+//counts time outs after 3 its game over
 let timeoutCount = 0;
 // scoreDisplay is the central display in the display window
 const scoreDisplay = document.querySelector("#score-display");
@@ -221,7 +221,6 @@ function startGame() {
     seqPoint = 0;
     console.log("DEBUG: startGame Function"); //debug
     let seqLength = 0;
-    console
     switch (skill){
         case 1: 
             seqLength = 8;
@@ -423,6 +422,7 @@ function coloursNotActive() {
 //========RESET GAME=========================//
 
 function resetGame() {
+    start = false; 
     console.log("DEBUG: Reset game");
     timeoutCount = 0;
     updateHLScore();
@@ -440,6 +440,7 @@ function resetGame() {
 //==========PLAYER WINS FUNCTION=============//
 
 function winning() {
+    start = false;
     timeoutCount = 0;
     console.log("DEBUG: Winning!!");
     updateHLScore();
@@ -455,6 +456,7 @@ function winning() {
 
 function gameOver() {
     console.log("DEBUG: Game Over");
+    start = false;
     timeoutCount = 0;
     playerTurn = false;
     updateHLScore();
