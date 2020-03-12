@@ -85,6 +85,7 @@ onOffButton.addEventListener('click', (event) => {
             buttonArray[i].style.color="black";
         }
         start = false;
+        onOffButton.innerHTML = "OFF";
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "PRESS START";
         if (!strict) {
@@ -108,6 +109,7 @@ onOffButton.addEventListener('click', (event) => {
         let buttonArray= [strictButton,highLastButton,startResetButton,skillButton]
         for(i=0; i<buttonArray.length; i++){
             buttonArray[i].style.color="grey";} 
+        onOffButton.innerHTML = "ON";
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "OFF";
         skillDisplay.innerHTML = " ";
@@ -150,12 +152,18 @@ startResetButton.addEventListener('click', (event) => {
     if (on) {
         if (start === false) {
             console.log("DEBUG: start game"); //debug
+            let buttonArray= [strictButton,skillButton]
+            for(i=0; i<buttonArray.length; i++){
+                buttonArray[i].style.color="grey";}
             start = true;
             startResetButton.innerHTML = "RESET";
             scoreDisplay.innerHTML = "SCORE: " + score;
             startGame();
         } else {
             console.log("DEBUG: reset game"); //debug
+            let buttonArray= [strictButton,skillButton]
+            for(i=0; i<buttonArray.length; i++){
+                buttonArray[i].style.color="black";}
             start = false;
             startResetButton.innerHTML = "START";
             scoreDisplay.innerHTML = "PRESS START";

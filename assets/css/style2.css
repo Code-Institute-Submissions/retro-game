@@ -48,6 +48,7 @@ button {
 /*---Space for Logo--*/
 .logo-heading{
     height:15vh;
+
     
   }
 #logo {
@@ -151,7 +152,7 @@ button {
 #strict {
     position: absolute;
     height:4vh;
-    width:10vh;
+    width:9vh;
     top:3vh;
     left: 3vh;
     font-size: 2vh;
@@ -163,7 +164,7 @@ button {
 #start-reset {
     position: absolute;
     top:2vh;
-    left: 15vh;
+    left: 14.5vh;
     width:15vh;
     height:6vh;
     font-size: 3vh;
@@ -255,7 +256,9 @@ button {
     text-align: center;
     font-weight: bolder;
 }
-
+/*.score {
+    margin:auto;
+}*/
 
 .how-to-link {
     text-align: center;
