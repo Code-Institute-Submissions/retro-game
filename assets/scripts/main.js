@@ -11,9 +11,9 @@ let compTurn = true;
 let score = 0;
 // The last score is always displayed when the page is initally loaded (More work needed here?)
 let highLast = "last";
-//set HIGH and LAST to zero when the page is first loaded
-let highScore = 0;
-let lastScore = 0;
+// Get HIGH and LAST from local storage
+let highScore = localStorage.getItem('high');
+let lastScore = localStorage.getItem('last');
 // set SKILL to easy when page loads
 let skill = 1;
 
@@ -302,7 +302,7 @@ function idleDelay() {
             setTimeout(() => {
                 coloursNotActive();
             }, 1500);
-            //run compPlay() every 1s until clear intaval is called.
+            //run compPlay() every 1s until clear interval is called.
             compPlayInterval = setInterval(compPlay, 1000);
         } else {
             // IF TIMEOUT IS CALLED MORE THAN 4 TIMES GAME OVER.
@@ -453,7 +453,7 @@ function winning() {
     console.log("DEBUG: Winning!!");
     updateHLScore();
     //AUDIO FANFARE
-
+    //************not yet implemented */
     //change display
     scoreDisplay.innerHTML = "WINNER!";
     clearInterval(idleDelayInterval);
@@ -484,6 +484,9 @@ function updateHLScore() {
     if (lastScore > highScore) {
         highScore = lastScore;
     }
+    //Add High and last to local storage so they are retained if the user closes the browser
+    localStorage.setItem('last', lastScore);
+    localStorage,setItem('high', highscore);
     displayHighLast();
 }
 

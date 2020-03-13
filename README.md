@@ -49,19 +49,19 @@ Game Panel display - Much of the HTML and CSS development time was spent develop
 
 - I can see my last and high socre in the display.
 
-- I can change the skill level to increase the length of the sequence. ** yet to be implemented
+- I can change the skill level to increase the length of the sequence. NORM = 16, HARD = 32.
 
 
 This section is also where you would share links to any wireframes, mockups, diagrams etc. that you created as part of the design process. These files should themselves either be included as a pdf file in the project itself (in an separate directory), or just hosted elsewhere online and can be in any format that is viewable inside the browser.
 assets\links\Atari-TouchMe.pdf 
 
-Click here for [Wireframes](.\assets\links\retro-game-mockups.pdf).
+Click here for [Wireframes](./assets/links/retro-game-mockups.pdf).
 
-Click here for [Game flow](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [Game flow](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [compPlay()](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [compPlay()](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [check()](.\assets\links\retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [check()](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
 ## Features
 
@@ -105,7 +105,7 @@ I have used:
 HTML5
 CSS3
 Javascript
-
+jasmine testing
 
 ## Testing
 
