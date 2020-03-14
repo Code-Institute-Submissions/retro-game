@@ -42,6 +42,10 @@ let blueAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound1
 let yellowAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
 let redAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
 let greenAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
+let incorrectAudio = new Audio(src ="https://github.com/MelBoardman/retro-game/blob/master/assets/audio/131657__bertrof__game-sound-wrong.wav");
+let winningAudio = new Audio(src = "https://github.com/MelBoardman/retro-game/blob/master/assets/audio/341985__unadamlar__goodresult.wav")
+let gameoverAudio = new Audio(src = "https://github.com/MelBoardman/retro-game/blob/master/assets/audio/382310__myfox14__game-over-arcade.wav")
+
 
 //counts up when there is no button press during players turn
 let idleCount = 0;
@@ -352,6 +356,9 @@ function check() {
         if (playerSequence[i] != sequence[i]) {
             console.log("DEBUG: Check function: player sequence not equal to sequence");
             playerCorrect = false;
+            if (sound) {
+                incorrectAudio.play();
+            }
         } else {
             playerCorrect = true;
         }
@@ -459,7 +466,9 @@ function winning() {
     console.log("DEBUG: Winning!!");
     updateHLScore();
     //AUDIO FANFARE
-    //************not yet implemented */
+    if (sound) {
+        winningAudio.play();
+    }
     //change display
     scoreDisplay.innerHTML = "WINNER!";
     clearInterval(idleDelayInterval);
@@ -475,6 +484,9 @@ function gameOver() {
     playerTurn = false;
     updateHLScore();
     //AUDIO looser tone
+    if (sound) {
+        gameoverAudio.play();
+    }
 
     //change display
     scoreDisplay.innerHTML = "YOU LOSE!";
