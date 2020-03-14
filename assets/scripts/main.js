@@ -12,8 +12,8 @@ let score = 0;
 // The last score is always displayed when the page is initally loaded (More work needed here?)
 let highLast = "last";
 // Get HIGH and LAST from local storage
-let highScore = localStorage.getItem('high');
-let lastScore = localStorage.getItem('last');
+let highScore = 0; //localStorage.getItem('high');
+let lastScore = 0; //localStorage.getItem('last');
 // set SKILL to easy when page loads
 let skill = 1;
 
@@ -38,14 +38,13 @@ let round = 0;
 //****sound on by default*** NOT YET IMPLEMENTED*** sound OFF function.
 let sound = true;
 
-let blueAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
-let yellowAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
-let redAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
-let greenAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
-let incorrectAudio = new Audio(src ="https://github.com/MelBoardman/retro-game/blob/master/assets/audio/131657__bertrof__game-sound-wrong.wav");
-let winningAudio = new Audio(src = "https://github.com/MelBoardman/retro-game/blob/master/assets/audio/341985__unadamlar__goodresult.wav")
-let gameoverAudio = new Audio(src = "https://github.com/MelBoardman/retro-game/blob/master/assets/audio/382310__myfox14__game-over-arcade.wav")
-
+let blueAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
+let yellowAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
+let redAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
+let greenAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
+let incorrectAudio = new Audio(src = "./assets/audio/131657__bertrof__game-sound-wrong.wav");
+let winningAudio = new Audio(src = "./assets/audio/341985__unadamlar__goodresult.wav");
+let gameoverAudio = new Audio(src = "./assets/audio/382310__myfox14__game-over-arcade.wav");
 
 //counts up when there is no button press during players turn
 let idleCount = 0;
@@ -89,9 +88,9 @@ onOffButton.addEventListener('click', (event) => {
     if (on === false) {
         console.log("DEBUG: on/off button status: ON"); //debug
         on = true;
-        let buttonArray= [strictButton,highLastButton,startResetButton,skillButton]
-        for(i=0; i<buttonArray.length; i++){
-            buttonArray[i].style.color="black";
+        let buttonArray = [strictButton, highLastButton, startResetButton, skillButton]
+        for (i = 0; i < buttonArray.length; i++) {
+            buttonArray[i].style.color = "black";
         }
         start = false;
         onOffButton.innerHTML = "OFF";
@@ -102,11 +101,11 @@ onOffButton.addEventListener('click', (event) => {
         } else {
             strictDisplay.innerHTML = "STRICT: ON"
         }
-        if (skill === 1){
+        if (skill === 1) {
             skillDisplay.innerHTML = "SKILL: EASY";
-        }else if(skill === 2){
+        } else if (skill === 2) {
             skillDisplay.innerHTML = "SKILL: NORM";
-        }else if(skill === 3){
+        } else if (skill === 3) {
             skillDisplay.innerHTML = "SKILL: HARD";
         }
         displayHighLast();
@@ -115,9 +114,10 @@ onOffButton.addEventListener('click', (event) => {
         console.log("DEBUG: on/off button status: OFF"); //debug
         on = false;
         start = false;
-        let buttonArray= [strictButton,highLastButton,startResetButton,skillButton]
-        for(i=0; i<buttonArray.length; i++){
-            buttonArray[i].style.color="grey";} 
+        let buttonArray = [strictButton, highLastButton, startResetButton, skillButton]
+        for (i = 0; i < buttonArray.length; i++) {
+            buttonArray[i].style.color = "grey";
+        }
         onOffButton.innerHTML = "ON";
         startResetButton.innerHTML = "START";
         scoreDisplay.innerHTML = "OFF";
@@ -139,6 +139,7 @@ strictButton.addEventListener('click', (event) => {
         } else {
             strict = false;
             strictDisplay.innerHTML = "STRICT: OFF";
+            lifeUsed = 0;
         }
     }
 
@@ -161,19 +162,22 @@ startResetButton.addEventListener('click', (event) => {
     if (on) {
         if (start === false) {
             console.log("DEBUG: start game"); //debug
-            let buttonArray= [strictButton,skillButton]
-            for(i=0; i<buttonArray.length; i++){
-                buttonArray[i].style.color="grey";}
+            let buttonArray = [strictButton, skillButton]
+            for (i = 0; i < buttonArray.length; i++) {
+                buttonArray[i].style.color = "grey";
+            }
             start = true;
             startResetButton.innerHTML = "RESET";
             scoreDisplay.innerHTML = "SCORE: " + score;
             startGame();
         } else {
             console.log("DEBUG: reset game"); //debug
-            let buttonArray= [strictButton,skillButton]
-            for(i=0; i<buttonArray.length; i++){
-                buttonArray[i].style.color="black";}
+            let buttonArray = [strictButton, skillButton]
+            for (i = 0; i < buttonArray.length; i++) {
+                buttonArray[i].style.color = "black";
+            }
             start = false;
+
             startResetButton.innerHTML = "START";
             scoreDisplay.innerHTML = "PRESS START";
             resetGame();
@@ -184,13 +188,13 @@ startResetButton.addEventListener('click', (event) => {
 //SKILL button - toggles between skill levels
 skillButton.addEventListener('click', (event) => {
     if (on && !start) {
-        if (skill === 1){
+        if (skill === 1) {
             skill = 2;
             skillDisplay.innerHTML = "SKILL: NORM";
-        }else if(skill === 2){
+        } else if (skill === 2) {
             skill = 3;
             skillDisplay.innerHTML = "SKILL: HARD";
-        }else if(skill === 3){
+        } else if (skill === 3) {
             skill = 1;
             skillDisplay.innerHTML = "SKILL: EASY";
         }
@@ -238,14 +242,14 @@ function startGame() {
     seqPoint = 0;
     console.log("DEBUG: startGame Function"); //debug
     let seqLength = 0;
-    switch (skill){
-        case 1: 
+    switch (skill) {
+        case 1:
             seqLength = 8;
             break;
-        case 2: 
+        case 2:
             seqLength = 16;
             break;
-        case 3: 
+        case 3:
             seqLength = 32;
             break;
     }
@@ -256,7 +260,7 @@ function startGame() {
 };
 
 //==============GENERATE SEQUENCE=========================//
-function generateSequence(seqLength){
+function generateSequence(seqLength) {
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
     for (i = 0; i < seqLength; i++) {
@@ -302,7 +306,7 @@ function idleDelay() {
         idleCount = 0;
         seqPoint = 0;
         timeoutCount++;
-        if (timeoutCount < 4) { 
+        if (timeoutCount < 4) {
             scoreDisplay.innerHTML = "TIME OUT";
             setTimeout(() => {
                 coloursNotActive();
@@ -443,13 +447,14 @@ function coloursNotActive() {
 //========RESET GAME=========================//
 
 function resetGame() {
-    start = false; 
+    start = false;
     console.log("DEBUG: Reset game");
     timeoutCount = 0;
     updateHLScore();
     //if not in strict mode - and life used. give life back for next game.
     if (lifeUsed === 1) {
         strict = false;
+        lifeUsed = 0;
     }
     //change display
     scoreDisplay.innerHTML = "PRESS START";
@@ -469,6 +474,11 @@ function winning() {
     if (sound) {
         winningAudio.play();
     }
+    //if not in strict mode - and life used. give life back for next game.
+    if (lifeUsed === 1) {
+        strict = false;
+        lifeUsed = 0;
+    };
     //change display
     scoreDisplay.innerHTML = "WINNER!";
     clearInterval(idleDelayInterval);
@@ -487,7 +497,11 @@ function gameOver() {
     if (sound) {
         gameoverAudio.play();
     }
-
+     //if not in strict mode - and life used. give life back for next game.
+     if (lifeUsed === 1) {
+        strict = false;
+        lifeUsed = 0;
+    }
     //change display
     scoreDisplay.innerHTML = "YOU LOSE!";
     clearInterval(idleDelayInterval);
@@ -503,8 +517,8 @@ function updateHLScore() {
         highScore = lastScore;
     }
     //Add High and last to local storage so they are retained if the user closes the browser
-    localStorage.setItem('last', lastScore);
-    localStorage,setItem('high', highscore);
+    //localStorage.setItem('last', lastScore);
+    //localStorage,setItem('high', highscore);
     displayHighLast();
 }
 
