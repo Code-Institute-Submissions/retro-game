@@ -5,6 +5,7 @@ font-family: 'Chango', ;*/
 
 body {
     margin:0 auto;
+    background-image: url("../images/colorful-1920x1200-rainbow-colors-dark-background-amoled-ios-11-9939.jpg");
     background-color: black;
     font-family: 'Press Start 2P', serif ;
     color: #fff;
@@ -265,7 +266,24 @@ button {
 
 /*============HOW TO PLAY ================*/
 .touch-image {
+    width:55vh;
     margin: 0 auto;
     text-align: center;   
 }
 
+.how-to {
+    font-family: 'Chango', serif;
+    width:55vh;
+    height:85vh;
+    margin:0 auto;
+    padding:0;  
+}
+li {
+    margin-top: 3%;
+}
+#controls {
+    width: 55vh;
+    margin: auto;
+    text-align: center;
+   
+}
