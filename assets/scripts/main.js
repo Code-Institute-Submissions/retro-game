@@ -38,6 +38,11 @@ let round = 0;
 //****sound on by default*** NOT YET IMPLEMENTED*** sound OFF function.
 let sound = true;
 
+let blueAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
+let yellowAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
+let redAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound3.mp3");
+let greenAudio = new Audio(src="https://s3.amazonaws.com/freecodecamp/simonSound4.mp3");
+
 //counts up when there is no button press during players turn
 let idleCount = 0;
 //used as set interval timer for idleCount.
@@ -408,6 +413,7 @@ function check() {
 
 //highlight quadrant and play note .. Called during the computers turn and the players turn
 function colourActive(colour) {
+
     let colourButton = [blueButton, yellowButton, redButton, greenButton];
     let bgColour = ["#0040ff", "#ffff00", "#ff1a1a", "#009900"];
     let colourSound = [blueAudio, yellowAudio, redAudio, greenAudio];
