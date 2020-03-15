@@ -5,42 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Chango|Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
     <title>Retro Game - How to play</title>
 </head>
 
 <body>
-    <div class="touch-image">
-        <!-- <img src="assets/images/retro-poster.png" alt="retro-poster"> -->
-        <img src = "./assets/images/retro-poster-mus.png"> 
-
-    
+    <div class="container-md">
+        <div class="touch-image">
+            <img src="./assets/images/retro-poster-mus.png">
+            <h1>THE FUN RETRO GAME WITH THE UNFORTUNATE NAME</h1>
+            <hr>
+        </div>
     </div>
+    <div class="container-md">
+        <div class="how-to ">
+            <h1>HOW TO PLAY</h1>
 
-    <div class="how-to">
-        <h1>HOW TO PLAY</h1>
-        <ul>
-            <li>Your objective is to repeat the sequence of signals correctly.</li>
-            <li>Each time you complete a sequence Touch me repeats it and adds an additional signal.</li>
-            <li>During the players turn, if there is no input for 10 seconds there is a time out
-                and the sequence will repeat. After 3 time outs the game is over.</li>
-            <li>With STRICT ON the player can make a mistake and the sequence will be repeated.
-                If it is entered incorrectly again the Game is over.</li>
-        </ul>
-
-        <h2>CONTROLS</h2>
-        <img id = "controls" src = "./assets/images/buttons.png">
-
+            <ul>
+                <li>Your objective is to repeat the sequence of signals correctly.</li>
+                <li>Each time you complete a sequence Touch me repeats it and adds an additional signal.</li>
+                <li>During the players turn, if there is no input for 10 seconds there is a time out
+                    and the sequence will repeat. After 3 time outs the game is over.</li>
+                <li>With STRICT ON the player can make a mistake and the sequence will be repeated.
+                    If it is entered incorrectly again the Game is over.</li>
+            </ul>
+            <hr>
+            <h1>CONTROLS</h1>
+            <img id="controls" src="./assets/images/buttons.png">
+            <hr>
 
 
 
+        </div>
     </div>
-    <div class="history">
-        <h1>HISTORY</h1>
-        <link src= "http://www.atarimuseum.com/videogames/arcade/fullsize/touchme.html" target = "_blank">
+    <div class="container-md">
+        <div class="history">
+            <h1>HISTORY</h1>
+            <a id="arcade Game" target = "_blank" href="how-to-play.html">HOW TO PLAY</a>
+            <link src="http://www.atarimuseum.com/videogames/arcade/fullsize/touchme.html" target="_blank">
+        </div>
     </div>
-
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
 
 </body>
+
 
 </html>

@@ -266,15 +266,13 @@ button {
 
 /*============HOW TO PLAY ================*/
 .touch-image {
-    width:55vh;
     margin: 0 auto;
-    text-align: center;   
+    text-align: center;
+    color: #ff00ff;   
 }
 
 .how-to {
-    font-family: 'Chango', serif;
-    width:55vh;
-    height:85vh;
+    font-family: 'Chango', serif ;
     margin:0 auto;
     padding:0;  
 }
@@ -282,8 +280,19 @@ li {
     margin-top: 3%;
 }
 #controls {
-    width: 55vh;
-    margin: auto;
+    margin: 0 auto;
     text-align: center;
+    left: 50%;
+
    
+}
+
+img {
+    margin: 0 auto;
+    left: 50%;
+}
+.history {
+    font-family: 'Chango', serif ;
+    margin:0 auto;
+    padding:0;  
 }

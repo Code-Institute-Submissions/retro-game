@@ -481,6 +481,7 @@ function winning() {
     };
     //change display
     scoreDisplay.innerHTML = "WINNER!";
+    startResetButton.innerHTML = "START";
     clearInterval(idleDelayInterval);
     clearInterval(compPlayInterval);
 }
@@ -503,7 +504,9 @@ function gameOver() {
         lifeUsed = 0;
     }
     //change display
+
     scoreDisplay.innerHTML = "YOU LOSE!";
+    startResetButton.innerHTML = "START";
     clearInterval(idleDelayInterval);
 
 }
