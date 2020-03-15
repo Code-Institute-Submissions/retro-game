@@ -9,7 +9,6 @@ function generateSequence(seqLength){
       //I have then added 1. This ensures that the number is always between 1 and 4
       sequence.push(Math.floor(Math.random() * 4) + 1);
   }
-  console.log("DEBUG: generate Sequence function: sequence = " + sequence); //for debug
 
   return sequence;
 

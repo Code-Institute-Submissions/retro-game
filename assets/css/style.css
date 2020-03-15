@@ -1,8 +1,4 @@
 
-/*font-family: 'Press Start 2P', ;
-font-family: 'Chango', ;*/
-
-
 body {
     margin:0 auto;
     background-image: url("../images/colorful-1920x1200-rainbow-colors-dark-background-amoled-ios-11-9939.jpg");
@@ -13,14 +9,6 @@ body {
 button {
     font-size:2vh;
     color: grey;
-}
-.intro {
-    height:100vh;
-    text-align: center;
-    color: #fff;
-    font-family: 'Chango', ;
-
-
 }
 
 /*--Div containing Game = determines the size, ensures proportion--*/
