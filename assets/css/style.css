@@ -266,26 +266,20 @@ button {
 
 /*============HOW TO PLAY ================*/
 .container {
-    margin: auto;
-    /* display: inline-block; */
+    margin: 5% auto;
     text-align: center;
-    left: 50%;
-    right: 50%;
+   
+    display: flex;
 
     
 }
-.touch-image {
-    max-width: 100vw;
-    margin: 0 auto;
-    text-align: center;
-    color: #ff00ff;   
-    padding:0;
-}
 
 .how-to {
-    font-family: 'Chango', serif ;
+   
     margin:0 auto;
-    padding:0;  
+    padding:0; 
+    color: #fff;
+    font-family: 'Chango', serif ; 
 }
 li {
     margin-top: 3%;
@@ -300,10 +294,10 @@ li {
 
 img {
     margin: 0 auto;
-    /* left: 50%; */
+  
 }
-.history {
-    font-family: 'Chango', serif ;
-    margin:0 auto;
-    padding:0;  
+
+#slogan {
+    font-family: 'Press Start 2P', serif ;
+    color: #990099;
 }
