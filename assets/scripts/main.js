@@ -86,7 +86,6 @@ const greenButton = document.querySelector("#green");
 // On/Off button status - sets variable and changes text in the display window
 onOffButton.addEventListener('click', (event) => {
     if (on === false) {
-        console.log("DEBUG: on/off button status: ON"); //debug
         on = true;
         let buttonArray = [strictButton, highLastButton, startResetButton, skillButton]
         for (i = 0; i < buttonArray.length; i++) {
@@ -111,7 +110,6 @@ onOffButton.addEventListener('click', (event) => {
         displayHighLast();
         // Add further functions later
     } else {
-        console.log("DEBUG: on/off button status: OFF"); //debug
         on = false;
         start = false;
         let buttonArray = [strictButton, highLastButton, startResetButton, skillButton]
@@ -161,7 +159,6 @@ highLastButton.addEventListener('click', (event) => {
 startResetButton.addEventListener('click', (event) => {
     if (on) {
         if (start === false) {
-            console.log("DEBUG: start game"); //debug
             let buttonArray = [strictButton, skillButton]
             for (i = 0; i < buttonArray.length; i++) {
                 buttonArray[i].style.color = "grey";
@@ -171,7 +168,6 @@ startResetButton.addEventListener('click', (event) => {
             scoreDisplay.innerHTML = "SCORE: " + score;
             startGame();
         } else {
-            console.log("DEBUG: reset game"); //debug
             let buttonArray = [strictButton, skillButton]
             for (i = 0; i < buttonArray.length; i++) {
                 buttonArray[i].style.color = "black";
@@ -206,23 +202,19 @@ skillButton.addEventListener('click', (event) => {
 
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
-    console.log("DEBUG: player turn Blue pressed"); //debug
     colourPressed(1);
 });
 //Yellow button functionality - only listening during players turn
 yellowButton.addEventListener('click', (event) => {
-    console.log("DEBUG: player turn Yellow pressed"); //debug
     colourPressed(2);
 });
 //Red button functionality - only listening during players turn
 redButton.addEventListener('click', (event) => {
-    console.log("DEBUG: player turn Red pressed"); //debug
     colourPressed(3);
 });
 //Green button functionality - only listening during players turn
 greenButton.addEventListener('click', (event) => {
     colourPressed(4);
-    console.log("DEBUG: player turn Green pressed"); //debug
 });
 
 
@@ -240,7 +232,6 @@ function startGame() {
     playerSequence = []; //to hold the players input - cleared each turn
     sequence = []; // randomly generated
     seqPoint = 0;
-    console.log("DEBUG: startGame Function"); //debug
     let seqLength = 0;
     switch (skill) {
         case 1:
@@ -269,8 +260,6 @@ function generateSequence(seqLength) {
         //I have then added 1. This ensures that the number is always between 1 and 4
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
-    console.log("DEBUG: generate Sequence function: sequence = " + sequence); //for debug
-
 }
 //===============COMP TURN===============================//
 //Computers turn
@@ -279,16 +268,13 @@ function compPlay() {
     setTimeout(() => {
         coloursNotActive();
     }, 400);
-    console.log("DEBUG: compPlay Function called"); //debug
     if (seqPoint === round) {
         seqPoint = 0;
         playerTurn = true;
         turnDisplay.innerHTML = "YOUR TURN";
-        console.log("DEBUG: end compPlay - players turn");
         idleDelayInterval = setInterval(idleDelay, 3300);
         clearInterval(compPlayInterval);
     } else {
-        console.log("DEBUG: coloursActive Function called" + seqPoint); //debug
         colourActive(sequence[seqPoint]); //highlights colour and plays sound.
     }
     seqPoint++;
@@ -329,7 +315,7 @@ function idleDelay() {
         }
     } else {
         idleCount++;
-        console.log("idleCount = " + idleCount);
+   
     }
 }
 
@@ -340,7 +326,6 @@ function idleDelay() {
 function colourPressed(colour) {
     idleCount = 0;
     if (playerTurn === true) {
-        console.log("DEBUG: player turn colour pressed" + colour); //debug
         colourActive(colour);
         playerSequence.push([colour]);
         setTimeout(() => {
@@ -354,11 +339,8 @@ function colourPressed(colour) {
 //Check Function is called from the colourPressed() function.
 //this checks the players input against the computer sequence.
 function check() {
-    console.log("check function");
-    console.log("DEBUG: playerSequence = " + playerSequence);
     for (i = 0; i < playerSequence.length; i++) {
         if (playerSequence[i] != sequence[i]) {
-            console.log("DEBUG: Check function: player sequence not equal to sequence");
             playerCorrect = false;
             if (sound) {
                 incorrectAudio.play();
@@ -366,16 +348,13 @@ function check() {
         } else {
             playerCorrect = true;
         }
-        console.log("DEBUG: Check function: playerCorrect = " + playerCorrect);
     }
 
     if (playerCorrect) {
         if (playerSequence.length === sequence.length) {
             score = score + 1;
-            console.log("player wins!");
             winning();
         } else if (playerSequence.length === round) {
-            console.log("player correct comp to play!");
             playerTurn = false; //correct sequence comp turn
             score = score + 1;
             scoreDisplay.innerHTML = "SCORE: " + score;
@@ -396,7 +375,6 @@ function check() {
         }
 
     } else if (!strict) {
-        console.log("strict active player gets second chance");
         playerSequence = []; //empty players sequence
         strict = true; // life used up
         playerTurn = false;
@@ -416,7 +394,6 @@ function check() {
             compPlayInterval = setInterval(compPlay, 1000);
         }, 2000);
     } else {
-        console.log("game over");
         gameOver();
     }
 }
@@ -437,18 +414,16 @@ function colourActive(colour) {
 }
 //return colours to deactivated state
 function coloursNotActive() {
-    console.log("DEBUG: Deactivate colours");
     blueButton.style.backgroundColor = "#0040ff88";
     yellowButton.style.backgroundColor = "#ffff0088";
     redButton.style.backgroundColor = "#ff1a1a88";
-    greenButton.style.backgroundColor = "#00990088";
+    greenButton.style.backgroundColor = "#00990069";
 }
 
 //========RESET GAME=========================//
 
 function resetGame() {
     start = false;
-    console.log("DEBUG: Reset game");
     timeoutCount = 0;
     updateHLScore();
     //if not in strict mode - and life used. give life back for next game.
@@ -468,7 +443,6 @@ function resetGame() {
 function winning() {
     start = false;
     timeoutCount = 0;
-    console.log("DEBUG: Winning!!");
     updateHLScore();
     //AUDIO FANFARE
     if (sound) {
@@ -489,7 +463,6 @@ function winning() {
 //===============GAME OVER=================//
 
 function gameOver() {
-    console.log("DEBUG: Game Over");
     start = false;
     timeoutCount = 0;
     playerTurn = false;
@@ -504,6 +477,10 @@ function gameOver() {
         lifeUsed = 0;
     }
     //change display
+    let buttonArray = [strictButton, skillButton]
+            for (i = 0; i < buttonArray.length; i++) {
+                buttonArray[i].style.color = "black";
+            }
 
     scoreDisplay.innerHTML = "YOU LOSE!";
     startResetButton.innerHTML = "START";
