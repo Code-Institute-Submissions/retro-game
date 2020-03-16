@@ -7,24 +7,21 @@ let strict = false;
 let lifeUsed = 0;
 // The computer always plays first 
 let compTurn = true;
-// The score always starts as 0 (maybe add compSequence.length)
+// The score always starts as 0
 let score = 0;
-// The last score is always displayed when the page is initally loaded (More work needed here?)
+// The last score is always displayed when the page is initally loaded 
 let highLast = "last";
 // Get HIGH and LAST from local storage
-let highScore = 0; //localStorage.getItem('high');
-let lastScore = 0; //localStorage.getItem('last');
+let highScore = 0; //localStorage.getItem('high'); caused error *future implementation*
+let lastScore = 0; //localStorage.getItem('last'); caused error *future implementation*
 // set SKILL to easy when page loads
 let skill = 1;
-
 // The Game is not started when the page loads
 let start = false;
-
 //computer always goes first
 let playerTurn = false;
 //Used in the check() function to determine when the player is correct.
 let playerCorrect = false;
-
 //Array to hold random sequence
 let sequence = [];
 //Array to hold player sequence ()
@@ -84,7 +81,6 @@ const redButton = document.querySelector("#red");
 const greenButton = document.querySelector("#green");
 
 
-
 // On/Off button status - sets variable and changes text in the display window
 onOffButton.addEventListener('click', (event) => {
     if (on === false) {
@@ -126,7 +122,6 @@ onOffButton.addEventListener('click', (event) => {
         clearInterval(idleDelayInterval);
         clearInterval(compPlayInterval);
         updateHLScore() //update the high and last score (incase off button has been pressed mid game)
-        // Add further functions later
     }
 });
 
@@ -218,9 +213,6 @@ redButton.addEventListener('click', (event) => {
 greenButton.addEventListener('click', (event) => {
     colourPressed(4);
 });
-
-
-
 
 //-----FUNCTIONS-----------//
 

@@ -61,15 +61,15 @@ I decided to place the 'How to play' information on a separate page. The aim of 
 
 - As a user, I can turn the sound OFF. ** yet to be implemented **Future enhancement. 
 
+- As a user I expect to be able to easily find details on how to play the game. 
 
+Click here for [Wireframes](./links/retro-game-mockups.pdf).
 
-Click here for [Wireframes](./assets/links/retro-game-mockups.pdf).
+Click here for [Game flow](./links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [Game flow](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [compPlay()](.links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
-Click here for [compPlay()](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
-
-Click here for [check()](./assets/links/retro-game-flowchart.pdf) flowchart used during JS code development.
+Click here for [check()](./links/retro-game-flowchart.pdf) flowchart used during JS code development.
 
 ## Features
 
@@ -90,7 +90,6 @@ Button Functionalities:
 7. Coloured buttons: BLUE BUTTON, YELLOW BUTTON, RED BUTTON, GREEN BUTTON - Illuminate and play sound during computer sequence or when the player presses during game play. 
 
 8. SKILL BUTTON: This can be used to toggle between EASY, NORM and HARD. In EASY the sequence length is 8. In NORM the sequence length is 16. In HARD the sequence length is 32. 
-
 
  
 ### Existing Features
@@ -119,21 +118,22 @@ In addition, you may also use this section to discuss plans for additional featu
 ### HTML validation
 I used https://validator.w3.org/ to validate the HTML.
 This highlighted one issue with '|' symbol used in the google fonts link:
- <link href="https://fonts.googleapis.com/css?family=Chango|Press+Start+2P&display=swap" rel="stylesheet">
+ "<link href="https://fonts.googleapis.com/css?family=Chango|Press+Start+2P&display=swap" rel="stylesheet">"
 
 ### CSS validation
  I used https://jigsaw.w3.org/css-validator/validator to validate the CSS and there are no issues.
 
 ### JS validation
 
-During the code development I developed flow charts included above. From this I have been able to develope a spreadsheet that deatails each feature / function and scenario to step through with the expected result. 
+I made use of console log during development to display DEBUG messages to allow me to determine which part of the code was running and what the variable values were. This was a huge help in identifying issues and determining correct code execution.
+Thorough validation in this way has given me complete confidence that my code is operating as intended.
 
-I made use of console log to display DEBUG messages to allow me to determine which part of the code was running and what the variable values were. This was a huge help in identifying issues and determining correct code execution.
-Thourough validation in this way has given me complete confidence that my code is operating as intended.
+During the code development I developed flow charts included above. From this I have been able to develop a spreadsheet that details each feature / function and scenario to step through with the expected result. 
 
-I have tested the game functional
+./links/retro-game-testing.pdf
+Click here for [Test plan](./links/retro-game-testing.pdf) flowchart used during JS code development.
 
-Jasmine JS testing
+#### Jasmine JS testing
 
 I planned to complete Jasmine Unit testing on some functions but as most functions interact with other functions there are few where this testing is useful. I have begun developing the scripts but encountered a few issues. I have simply run out of time. My main focus has been developing the game features and my Javascript knowledge. With additional time I would like to add this to expand my understanding and skillset. 
 
@@ -141,37 +141,31 @@ https://www.tutorialspoint.com/jasminejs
 
 ## Different Devices
 
-I used google chrome developer tools.
-
-In this section, you need to convince the assessor that you have conducted enough testing to legitimately believe that the site works well. Essentially, in this part you will want to go over all of your user stories from the UX section and ensure that they all work as intended, with the project providing an easy and straightforward way for the users to achieve their goals.
-
-Whenever it is feasible, prefer to automate your tests, and if you've done so, provide a brief explanation of your approach, link to the test file(s) and explain how to run them.
-
-For any scenarios that have not been automated, test the user stories manually and provide as much detail as is relevant. A particularly useful form for describing your testing process is via scenarios, such as:
-
-1. Contact form:
-    1. Go to the "Contact Us" page
-    2. Try to submit the empty form and verify that an error message about the required fields appears
-    3. Try to submit the form with an invalid email address and verify that a relevant error message appears
-    4. Try to submit the form with all inputs valid and verify that a success message appears.
-
-In addition, you should mention in this section how your project looks and works on different browsers and screen sizes.
-
-You should also mention in this section any interesting bugs or problems you discovered during your testing, even if you haven't addressed them yet.
-
-If this section grows too long, you may want to split it off into a separate file and link to it from here.
+I have thoroughly tested this with google chrome and google developer tools to check all different screen sizes. I have also tested this on several Android devices. I distributed the link to the site to many of my family and friends to test. I therefore have some limited testing on Apple devices.
 
 ## Deployment
 
-This section should describe the process you went through to deploy the project to a hosting platform (e.g. GitHub Pages or Heroku).
+I have deployed my site to git hub pages. To do this I opened my repository on github and clicked on the 'settings' tab. I then scrolled down to the git hub page section and with in the source section selected 'master branch'. The site was then deployed to github pages.
 
 
-In particular, you should provide all details of the differences between the deployed version and the development version, if any, including:
-- Different values for environment variables (Heroku Config Vars)?
-- Different configuration files?
-- Separate git branch?
+To create a clone of the project on your own machine you can:
+- Navigate to the repository on git hub: https://github.com/MelBoardman/retro-game
+- click on 'clone or Download'. To clone the repository using HTTPS, under "Clone with HTTPS", click . To clone the repository using an SSH key, including a certificate issued by your organization's SSH certificate authority, click Use SSH, then click .
+- Open Git Bash.
+- Change the current working directory to the location where you want the cloned directory to be made.
+- Type git clone, and then paste the URL copied
+            $ git clone https://github.com/melboardman/retro-game
+- Press Enter. Your local clone will be created.
 
-In addition, if it is not obvious, you should also describe how to run your code locally.
+Cloning a repository to GitHub Desktop
+On GitHub, navigate to the main page of the repository.
+
+Under your repository name, click  to clone your repository in Desktop. Follow the prompts in GitHub Desktop to complete the clone. For more information, see "Cloning a repository from GitHub to GitHub Desktop."
+
+https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository 
+
+ 
+
 
 
 ## Credits
