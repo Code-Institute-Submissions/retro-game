@@ -164,21 +164,36 @@ Under your repository name, click  to clone your repository in Desktop. Follow t
 
 https://help.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository 
 
- 
-
-
 
 ## Credits
 
 ### Content
-- The text for section Y was copied from the [Wikipedia article Z](https://en.wikipedia.org/wiki/Z)
+- Audio tones
+simon sounds taken from free code camp.
+
+other audio taken from freesounds.org
+
+131657__bertrof__game-sound-wrong.wav
+341985__unadamlar__goodresult.wav
+382310__myfox14__game-over-arcade.wav
 
 ### Media
-- The photos used in this site were obtained from ...
+
+background image:
+https://www.bing.com/images/search?view=detailV2&id=B1E8ABF695AAFDB605DD9DBA1CE4AD6FC54C7E64&thid=OIP.i821QjwYywfIUEgeYb02iwHaEo&mediaurl=https%3A%2F%2Fwallpapersite.com%2Fimages%2Fwallpapers%2Fcolorful-1920x1200-rainbow-colors-dark-background-amoled-ios-11-9939.jpg&
+
+controls image edited from the user manual
+https://www.usermanuals.tech/d/atari-touch-me-instruction-manual/part1#1
 
 ### Acknowledgements
 
-- I received inspiration for this project from X
+during developement I used online resources to help with issues I came across:
+
+https://www.w3schools.com/
+https://stackoverflow.com/
+
+I would also like to thank my Mentor: Ignatius Ukwuoma for the support.
+
 
 
 
