@@ -1,4 +1,4 @@
-//===========RETRO GAME JS SCRIPT====================//
+//---------RETRO GAME JS SCRIPT---------------//
 // Game panel is always OFF when page is initially loaded.
 let on = false;
 // Strict is always OFF when page is initially loaded.
@@ -37,6 +37,8 @@ let compPlayInterval;
 let round = 0;
 //****sound on by default*** NOT YET IMPLEMENTED*** sound OFF function.
 let sound = true;
+
+//--------------- Audio-----------------------//
 
 let blueAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound1.mp3");
 let yellowAudio = new Audio(src = "https://s3.amazonaws.com/freecodecamp/simonSound2.mp3");
@@ -198,7 +200,7 @@ skillButton.addEventListener('click', (event) => {
 
 });
 
-//=================PLAYER TURN EVENT LISTNERS===============//
+//--------------------PLAYER TURN EVENT LISTNERS-----------------------//
 
 //Blue button functionality - only listening during players turn
 blueButton.addEventListener('click', (event) => {
@@ -222,7 +224,7 @@ greenButton.addEventListener('click', (event) => {
 
 //-----FUNCTIONS-----------//
 
-//==========START GAME=============//
+//-------------START GAME---------------//
 function startGame() {
     score = 0;
     scoreDisplay.innerHTML = "SCORE: " + score;
@@ -250,7 +252,7 @@ function startGame() {
     compPlayInterval = setInterval(compPlay, 1000); //play sequence for the player to copy and then set playerTurn = true
 };
 
-//==============GENERATE SEQUENCE=========================//
+//------------------GENERATE SEQUENCE---------------------//
 function generateSequence(seqLength) {
     // Populate random sequence with numbers between 1 and 4.
     // loop currently set to 8 but can use skill level when this has been implemented
@@ -261,7 +263,7 @@ function generateSequence(seqLength) {
         sequence.push(Math.floor(Math.random() * 4) + 1);
     }
 }
-//===============COMP TURN===============================//
+//-------------------COMP TURN--------------------------//
 //Computers turn
 function compPlay() {
     turnDisplay.innerHTML = "COMP TURN";
@@ -280,7 +282,7 @@ function compPlay() {
     seqPoint++;
 };
 
-//===============IDLE DELAY===================================//
+//------------------IDLE DELAY------------------------//
 //reminds player of sequence if there are no button presses for 10s 
 function idleDelay() {
     if (!playerTurn) {
@@ -319,7 +321,7 @@ function idleDelay() {
     }
 }
 
-//============COLOUR PRESSES===========================//
+//-----------------------COLOUR PRESSES-------------------------//
 //The colour button presses are only acknowledged during the players turn. 
 //the colour is highlighted and note played. The colours return to normal. 
 //The colour pressed is added to the player sequence and then checked in the check() function.
@@ -335,7 +337,7 @@ function colourPressed(colour) {
     }
 }
 
-//============CHECK FUNCTION=============================//
+//-------------------CHECK FUNCTION---------------------------//
 //Check Function is called from the colourPressed() function.
 //this checks the players input against the computer sequence.
 function check() {
@@ -397,7 +399,7 @@ function check() {
         gameOver();
     }
 }
-//=========COLOUR ACTIVATION==============//
+//------------------COLOUR ACTIVATION-------------------//
 
 //highlight quadrant and play note .. Called during the computers turn and the players turn
 function colourActive(colour) {
@@ -420,7 +422,7 @@ function coloursNotActive() {
     greenButton.style.backgroundColor = "#00990069";
 }
 
-//========RESET GAME=========================//
+//------------RESET GAME-----------------//
 
 function resetGame() {
     start = false;
@@ -438,14 +440,14 @@ function resetGame() {
 
 }
 
-//==========PLAYER WINS FUNCTION=============//
+//---------------PLAYER WINS FUNCTION-----------------//
 
 function winning() {
     start = false;
     timeoutCount = 0;
     updateHLScore();
-    //AUDIO FANFARE
     if (sound) {
+        //AUDIO FANFARE
         winningAudio.play();
     }
     //if not in strict mode - and life used. give life back for next game.
@@ -460,7 +462,7 @@ function winning() {
     clearInterval(compPlayInterval);
 }
 
-//===============GAME OVER=================//
+//--------------GAME OVER-------------------//
 
 function gameOver() {
     start = false;
@@ -481,14 +483,11 @@ function gameOver() {
             for (i = 0; i < buttonArray.length; i++) {
                 buttonArray[i].style.color = "black";
             }
-
     scoreDisplay.innerHTML = "YOU LOSE!";
     startResetButton.innerHTML = "START";
     clearInterval(idleDelayInterval);
-
 }
-
-//===========HIGH LAST=======================//
+//------------HIGH LAST---------------//
 
 //---Function to update high and last scores-----//
 function updateHLScore() {
@@ -497,6 +496,7 @@ function updateHLScore() {
         highScore = lastScore;
     }
     //Add High and last to local storage so they are retained if the user closes the browser
+    //This was 
     //localStorage.setItem('last', lastScore);
     //localStorage,setItem('high', highscore);
     displayHighLast();
